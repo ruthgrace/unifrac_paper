@@ -1,0 +1,147 @@
+\begin{thebibliography}{10}
+
+\bibitem{lozupone2005unifrac}
+Lozupone C, Knight R.
+\newblock UniFrac: a new phylogenetic method for comparing microbial
+  communities.
+\newblock Applied and environmental microbiology. 2005;71(12):8228--8235.
+
+\bibitem{lozupone2007quantitative}
+Lozupone CA, Hamady M, Kelley ST, Knight R.
+\newblock Quantitative and qualitative $\beta$ diversity measures lead to
+  different insights into factors that structure microbial communities.
+\newblock Applied and environmental microbiology. 2007;73(5):1576--1585.
+
+\bibitem{smith2013gut}
+Smith MI, Yatsunenko T, Manary MJ, Trehan I, Mkakosya R, Cheng J, et~al.
+\newblock Gut microbiomes of Malawian twin pairs discordant for kwashiorkor.
+\newblock Science. 2013;339(6119):548--554.
+
+\bibitem{song2013cohabiting}
+Song SJ, Lauber C, Costello EK, Lozupone CA, Humphrey G, Berg-Lyons D, et~al.
+\newblock Cohabiting family members share microbiota with one another and with
+  their dogs.
+\newblock Elife. 2013;2:e00458.
+
+\bibitem{chen2012associating}
+Chen J, Bittinger K, Charlson ES, Hoffmann C, Lewis J, Wu GD, et~al.
+\newblock Associating microbiome composition with environmental covariates
+  using generalized UniFrac distances.
+\newblock Bioinformatics. 2012;28(16):2106--2113.
+
+\bibitem{evans2012phylogenetic}
+Evans SN, Matsen FA.
+\newblock The phylogenetic Kantorovich--Rubinstein metric for environmental
+  sequence samples.
+\newblock Journal of the Royal Statistical Society: Series B (Statistical
+  Methodology). 2012;74(3):569--592.
+
+\bibitem{friedman2012inferring}
+Friedman J, Alm EJ.
+\newblock Inferring correlation networks from genomic survey data.
+\newblock PLoS Comput Biol. 2012;8(9):e1002687.
+
+\bibitem{fernandes2013anova}
+Fernandes AD, Macklaim JM, Linn TG, Reid G, Gloor GB.
+\newblock ANOVA-like differential expression (ALDEx) analysis for mixed
+  population RNA-Seq.
+\newblock PLoS One. 2013;8(7):e67019.
+
+\bibitem{fernandes2014unifying}
+Fernandes AD, Reid JN, Macklaim JM, McMurrough TA, Edgell DR, Gloor GB.
+\newblock Unifying the analysis of high-throughput sequencing datasets:
+  characterizing RNA-seq, 16S rRNA gene sequencing and selective growth
+  experiments by compositional data analysis.
+\newblock Microbiome. 2014;2(1):1.
+
+\bibitem{lovell2015proportionality}
+Lovell D, Pawlowsky-Glahn V, Egozcue JJ, Marguerat S, B{\"a}hler J.
+\newblock Proportionality: a valid alternative to correlation for relative
+  data.
+\newblock PLoS Comput Biol. 2015;11(3):e1004075.
+
+\bibitem{simberloff1978use}
+Simberloff D.
+\newblock Use of rarefaction and related methods in ecology.
+\newblock In: Biological data in water pollution assessment: quantitative and
+  statistical analyses. ASTM International; 1978. .
+
+\bibitem{de2011evaluation}
+de~C{\'a}rcer DA, Denman SE, McSweeney C, Morrison M.
+\newblock Evaluation of subsampling-based normalization strategies for tagged
+  high-throughput sequencing data sets from gut microbiomes.
+\newblock Applied and environmental microbiology. 2011;77(24):8795--8798.
+
+\bibitem{caporaso2010qiime}
+Caporaso JG, Kuczynski J, Stombaugh J, Bittinger K, Bushman FD, Costello EK,
+  et~al.
+\newblock QIIME allows analysis of high-throughput community sequencing data.
+\newblock Nature methods. 2010;7(5):335--336.
+
+\bibitem{oksanen2007vegan}
+Oksanen J, Kindt R, Legendre P, O’Hara B, Stevens MHH, Oksanen MJ, et~al.
+\newblock The vegan package.
+\newblock Community ecology package. 2007;p. 631--637.
+
+\bibitem{shannon2001mathematical}
+Shannon CE.
+\newblock A mathematical theory of communication.
+\newblock ACM SIGMOBILE Mobile Computing and Communications Review.
+  2001;5(1):3--55.
+
+\bibitem{aitchison1982statistical}
+Aitchison J.
+\newblock The statistical analysis of compositional data.
+\newblock Journal of the Royal Statistical Society Series B (Methodological).
+  1982;p. 139--177.
+
+\bibitem{palarea2015zcompositions}
+Palarea-Albaladejo J, Mart{\'\i}n-Fern{\'a}ndez JA.
+\newblock zCompositions—R package for multivariate imputation of
+  left-censored data under a compositional approach.
+\newblock Chemometrics and Intelligent Laboratory Systems. 2015;143:85--96.
+
+\bibitem{beals1984bray}
+Beals EW.
+\newblock Bray-Curtis ordination: an effective strategy for analysis of
+  multivariate ecological data.
+\newblock Advances in Ecological Research. 1984;14(1):55.
+
+\bibitem{turnbaugh2007human}
+Turnbaugh PJ, Ley RE, Hamady M, Fraser-Liggett C, Knight R, Gordon JI.
+\newblock The human microbiome project: exploring the microbial part of
+  ourselves in a changing world.
+\newblock Nature. 2007;449(7164):804.
+
+\bibitem{urbaniak2016human}
+Urbaniak C, Angelini M, Gloor GB, Reid G.
+\newblock Human milk microbiota profiles in relation to birthing method,
+  gestation and infant gender.
+\newblock Microbiome. 2016;4(1):1--9.
+
+\bibitem{lozupone2011unifrac}
+Lozupone C, Lladser ME, Knights D, Stombaugh J, Knight R.
+\newblock UniFrac: an effective distance metric for microbial community
+  comparison.
+\newblock The ISME journal. 2011;5(2):169.
+
+\bibitem{hsiao2013microbiota}
+Hsiao EY, McBride SW, Hsien S, Sharon G, Hyde ER, McCue T, et~al.
+\newblock Microbiota modulate behavioral and physiological abnormalities
+  associated with neurodevelopmental disorders.
+\newblock Cell. 2013;155(7):1451--1463.
+
+\bibitem{sonnenburg2016diet}
+Sonnenburg ED, Smits SA, Tikhonov M, Higginbottom SK, Wingreen NS, Sonnenburg
+  JL.
+\newblock Diet-induced extinctions in the gut microbiota compound over
+  generations.
+\newblock Nature. 2016;529(7585):212--215.
+
+\bibitem{gorzelak2015methods}
+Gorzelak MA, Gill SK, Tasnim N, Ahmadi-Vand Z, Jay M, Gibson DL.
+\newblock Methods for Improving Human Gut Microbiome Data by Reducing
+  Variability through Sample Processing and Storage of Stool.
+\newblock PloS one. 2015;10(8):e0134802.
+
+\end{thebibliography}
