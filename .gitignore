@@ -1,0 +1,10 @@
+*.aux
+*.app
+*.dvi
+*.lof
+*.log
+*.lot
+*.toc
+*.blg
+*.bbl
+
