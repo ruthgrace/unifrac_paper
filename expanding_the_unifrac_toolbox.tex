@@ -141,7 +141,7 @@
 \pagestyle{myheadings}
 \pagestyle{fancy}
 \fancyhf{}
-\lhead{\includegraphics[width=2.0in]{PLOS-submission.eps}}
+\lhead{\includegraphics[width=2.0in]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/PLOS-submission.eps}}
 \rfoot{\thepage/\pageref{LastPage}}
 \renewcommand{\footrule}{\hrule height 2pt \vspace{2mm}}
 \fancyheadoffset[L]{2.25in}
@@ -222,7 +222,7 @@ In 2005, Lozupone et al introduced the UniFrac distance metric, a measure to cal
 Unweighted UniFrac \cite{lozupone2005unifrac} uses an inferred evolutionary distance to measure similarity between samples. It requires a reference phylogenetic tree containing all the taxa present in the samples to be examined. The calculation is performed by dividing the branch lengths shared between the two samples by the branch lengths covered by either sample. A distance of 0 means that the samples are identical, and a distance of 1 means that the two samples share no taxa in common.
 
 \begin{figure}[h]
-\includegraphics[scale=0.5]{unifrac_distance.eps}
+\includegraphics[scale=0.5]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/unifrac_distance.eps}
 \caption{{\bf Unweighted UniFrac.}
 When two samples do not share any branches of the phylogenetic tree, the unweighted UniFrac distance is maximized at 1. When two samples share half of their branch lengths on the phylogenetic tree, the unweighted UniFrac distance is 0.5. If the two samples contain exactly the same taxa, the unweighted UniFrac distance is minimized at 0, since the samples share all branches.}
 \label{fig1}
@@ -341,7 +341,7 @@ The script used to run this analysis can be referenced at \url{https://github.co
 A commentary by Lozupone et al. 2011 \cite{lozupone2011unifrac} addressed the sensitivity of Unweighted UniFrac to sampling. They utilized mean UniFrac values to compute a confidence ellipse. However, we observed that this approach under-represented the true variability of unweighted UniFrac as a distance metric by highlighting how individual samples vary. In the absence of true differences and in the presence of uneven sampling, unweighted UniFrac can be sensitive to rarefaction variants. We show this by analyzing two rarefactions of the same body site with the rationale that if there is no true difference in the data, separation of these samples should not be observed.
 
 \begin{figure}[h]
-\includegraphics[scale=0.7]{sample_migration.eps}
+\includegraphics[scale=0.7]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/sample_migration.eps}
 \caption{{\bf Sample migration in different rarefactions, plotted on principal coordinates, measured with unweighted UniFrac.}
 Red samples have moved from the left cluster to the right cluster between rarefactions. Blue samples have moved from the right cluster to the left. Samples are taken from the tongue dorsum body site from the Human Microbiome Project database.}
 \label{fig2}
@@ -352,7 +352,7 @@ Sixty tongue dorsum subsamples were drawn from the Human Microbiome Project data
 In both rarefactions on Fig.~\ref{fig2}, samples separated distinctly into two clusters on principal coordinate 1. Principal coordinate 1 explains the most variation in the data, and is thus useful to visualize if any associated metadata is behind the sample separation. However, the separation was not explainable by any metadata associated with the HMP experiment, and is thus an undesirable result. When plotting the rarefactions against each other, various samples are observed moving between the various clusters. This example demonstrates that samples with little difference can appear to be different through the unweighted UniFrac distance metric.
 
 \begin{figure}[h]
-\includegraphics[scale=0.7]{ellipses.eps}
+\includegraphics[scale=0.7]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/ellipses.eps}
 \caption{{\bf Maxiumum relative deviation of rarefactions versus median deviation for traditional and non-traditional microbiome dissimilarity metrics.} Sixty samples from the tongue dorsum were taken from the Human Microbiome Project \cite{turnbaugh2007human}, and rarefied 100 times. The maximum relative deviation was plotted against the median relative deviation of the rarefied data, and ellipses were drawn at the 95\% confidence interval, around the cloud of points for each metric. Both the maximum relative deviation of rarefied data and the median relative deviation of rarefied data are greater in unweighted UniFrac than in weighted UniFrac, Bray Curtis distance, centered ratio UniFrac, and information UniFrac.}
 \label{fig3}
 \end{figure}
@@ -367,7 +367,7 @@ The maximum value of Vres for each rarefaction is plotted against the median val
 The UniFrac distance is defined as the sum of unshared branches divided by the sum of all branch lengths \cite{lozupone2005unifrac}. Samples that are dissimilar will have values closer to 1 as they should have more unshared branches relative to one another. Similar samples have a value closer to 0 since they will have fewer unshared branches. As defined previously, rarefaction serves the purpose of standardizing sample counts to a common denominator, which is usually defined as the lowest sequencing depth(cite rarefaction paper here). One point to note is that rarefaction carries the assumption that microbiota within samples are homogeneous and randomly distributed. However, this assumption is only valid if proper sampling protocols are observed \cite{gorzelak2015methods}. A combination of unevenly sampled genes and distantly related genes will contribute to UniFrac's variability when genes are ultimately rarefied. Distance matrices between samples will be affected when rare genes are left out during the rarefaction processes. It becomes intuitive to see how similar samples may grow dissimilar from each other through unweighted UniFrac on rarefied samples as the number of unshared branches increases as genes disappear.
 
 \begin{figure}[h]
-\includegraphics[scale=0.5]{tree.eps}
+\includegraphics[scale=0.5]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/tree.eps}
 \caption{{\bf Phylogenetic tree with long isolated branches.}
 Variation in different rarefactions of data in unweighted UniFrac analysis is exacerbated by the presence of long isolated branches in the phylogenetic tree. }
 \label{fig4}
@@ -421,7 +421,7 @@ Here we explore some alternatives to unweighted and weighted UniFrac, and discus
 The difference in information content between low proportional abundances (which make up the bulk of microbiome data) is generally higher than the difference between the proportional abundances themselves, potentially allowing scientists to differentiate groups with subtle differences.
 
 \begin{figure}[h]
-\includegraphics[scale=0.6]{weightings.eps}
+\includegraphics[scale=0.6]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/weightings.eps}
 \caption{{\bf Unifrac weights. }
 Each UniFrac weighting is plotted with the corresponding proportional abundance. The black line is unweighted UniFrac, the red line is weighted UniFrac,and  the blue line is information UniFrac. }
 \label{fig5}
@@ -432,7 +432,7 @@ Near the 0, 0 point in Fig.~\ref{fig5}, the proportional abundances are low. Her
 \subsection{Tongue and cheek comparison}
 
 \begin{figure}[h]
-\includegraphics[scale=0.8]{tongue_cheek.eps}
+\includegraphics[scale=0.8]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/tongue_cheek.eps}
 \caption{{\bf Analysis of tongue and cheek data using different UniFrac weightings. }
 A principal coordinate analysis of a 16S rRNA experiment done on samples from the tongue and cheek, selected from the Human Microbiome Project \cite{turnbaugh2007human}. All weightings show separation between the samples by body site. }
 \label{fig6}
@@ -445,7 +445,7 @@ Fig.~\ref{fig6} shows a principal coordinate analysis plot with four different m
 \subsection{Breast milk Data}
 
 \begin{figure}[h]
-\includegraphics[scale=0.8]{breastmilk.eps}
+\includegraphics[scale=0.8]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/breastmilk.eps}
 \caption{{\bf Analysis of breast milk data using different UniFrac weightings. }
 A principal coordinate analysis of a 16S rRNA experiment done on samples from a 16S rRNA experiment on breast milk. The circled sample is infected with 97\% \textit{Pseudomonas}, compared to 15-20\% in the other samples. }
 \label{fig7}
