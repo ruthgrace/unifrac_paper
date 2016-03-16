@@ -265,24 +265,24 @@ Rarefaction normalizes the samples OTU counts to a standard sequencing depth \ci
 Rarefactions can be performed using the Qiime software \cite{caporaso2010qiime} or using the vegan package in R \cite{oksanen2007vegan}.
 
 \paragraph{Unweighted UniFrac}\mbox{}\\
-Unweighted UniFrac is calculated based on the presence or absence of counts for each branch in the phylogenetic tree, when comparing two samples. A branch is unshared when one sample has a non-zero abundance but not the other, and a branch is shared when both samples have a non-zero abundance. The formula for unweighted UniFrac is as follows, where $b$ is the set of branch lengths in the phylogenetic tree:
+Unweighted UniFrac is calculated based on the presence or absence of counts for each branch in the phylogenetic tree, when comparing two samples. A branch is unshared when one sample has a non-zero abundance but not the other, and a branch is shared when both samples have a non-zero abundance. The formula for unweighted UniFrac is as follows, where $b$ is the set of branch lengths in the phylogenetic tree, and $A$ and $B$ represent the two samples being compared:
 
 \begin{align*}
-\frac{\sum_{}{} b_{unshared}}{\sum_{}{} b_{unshared} + \sum_{}{} b_{shared}}
+Unweighted_{AB} = \frac{\sum_{}{} (b_{A} - b_{B}) \cup (b_{B} - b_{A})}{\sum_{}{} b_{A} \cup b_{B}}
 \end{align*}
 
 \paragraph{Weighted UniFrac}\mbox{}\\
 Weighted UniFrac \cite{lozupone2007quantitative} also incorporates each branch length of the phylogenetic tree, and weights them according to proportional abundance of the two samples. The formula for weighed UniFrac is as follows, where $A$ and $B$ are the two samples, $b$ is the set of branch lengths, and $\frac{A_{i}}{A_{T}}$ and $\frac{B_{i}}{B_{T}}$ are the proportional abundances associated with branch length $b_{i}$:
 
 \begin{align*}
-\sum_{i}^{n} b_{i} \times \left| \frac{A_{i}}{A_{T}} - \frac{B_{i}}{B_{T}} \right|
+Weighted_{AB} = \sum_{i}^{n} b_{i} \times \left| \frac{A_{i}}{A_{T}} - \frac{B_{i}}{B_{T}} \right|
 \end{align*}
 
 \paragraph{Information UniFrac}\mbox{}\\
 Information UniFrac is calculated by weighing each branch length by the difference in the uncertainty of the taxa abundance between the two samples. Uncertainty is calculated as follows, where p is the proportional abundance \cite{shannon2001mathematical}:
 
 \begin{equation}\label{eq:schemeP} 
-- p  \times log_{2}(p)
+uncertainty = - p  \times log_{2}(p)
 \end{equation}
 
 If a sample is 50\% taxa A and 50\% taxa B, then the proportional abundances have maximum uncertainty about what taxa is likely to be seen in a given sequence read. If a sample is 80\% taxa A and 20\% taxa B, then there is less uncertainty, because a given sequence read is more likely to be taxa A. When the amount of uncertainty that a taxa has in one sample corresponds with the amount of uncertainty the same taxa has in a different sample, the abundance of that taxa is mutually informative between samples. Weighting UniFrac by uncertainty combines the the concept of uncertainty with phylogenetic relationships to identify taxa that are differentially informative between groups.
@@ -290,20 +290,20 @@ If a sample is 50\% taxa A and 50\% taxa B, then the proportional abundances hav
 The formula for Information UniFrac is as follows:
 
 \begin{align*}
-\sum_{i}^{n} b_{i} \times \left| \frac{A_{i}}{A_{T}}log\left(\frac{A_{i}}{A_{T}}\right) - \frac{B_{i}}{B_{T}}log\left(\frac{B_{i}}{B_{T}}\right) \right|
+Information_{AB} = \sum_{i}^{n} b_{i} \times \left| \frac{A_{i}}{A_{T}}log\left(\frac{A_{i}}{A_{T}}\right) - \frac{B_{i}}{B_{T}}log\left(\frac{B_{i}}{B_{T}}\right) \right|
 \end{align*}
 
 \paragraph{Centered Ratio UniFrac}\mbox{}\\
 In complex microbiome communities, there are very many bacterial taxa with a low level of counts. Taking the geometric mean of the proportional abundances of taxa in a microbiome sample represents an unbiased baseline \cite{aitchison1982statistical}. Experiments generally do not have power to detect differences at abundances below the mean \cite{fernandes2013anova}. Centering the proportional abundances around the geometric mean thus allows one to examine the data in context, muting differences that are close to baseline and accentuating outliers. The formula for centered ratio UniFrac is as follows, where $gm$ is the geometric mean:
 
 \begin{align*}
-\sum_{i}^{n} b_{i} \times \left| \frac{\frac{A_{i}}{A_{T}}}{gm(A_{i})} - \frac{\frac{B_{i}}{B_{T}}}{{gm(B_{i})}} \right|
+Centered Ratio_{AB} = \sum_{i}^{n} b_{i} \times \left| \frac{\frac{A_{i}}{A_{T}}}{gm(A_{i})} - \frac{\frac{B_{i}}{B_{T}}}{{gm(B_{i})}} \right|
 \end{align*}
 
 Note that the geometric mean is calculated by combining all children in the subtree of $b_{i}$ into $\frac{A_{i}}{A_{T}}$ for sample $A$ or $\frac{B_{i}}{B_{T}}$ for sample $B$, and including the rest of the single taxa proportional abundances separately. The one combined proportional abundance and the remaining single taxa proportional abundances are input into the geometric mean formula, as set $a$:
 
 \begin{align*}
-\left( \prod_{i}^{n} a_{i}\right)^{1/n}
+gm(a) = \left( \prod_{i}^{n} a_{i}\right)^{1/n}
 \end{align*}
 
 One challenge when it comes to the analysis of read count data is the presence of zero counts. Whether a low-abundance taxa appears in the data as a zero or a low positive count is up to chance, and assuming that a zero count represents the absence of a taxa can be very misleading \cite{fernandes2013anova}. A Bayesian approach can be used to estimate the likelihood that a zero could be changed to a positive count if the sample were resequenced, implemented by the cmultRepl command in the zCompositions package in R \cite{palarea2015zcompositions}.
