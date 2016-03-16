@@ -265,11 +265,13 @@ Rarefaction normalizes the samples OTU counts to a standard sequencing depth \ci
 Rarefactions can be performed using the Qiime software \cite{caporaso2010qiime} or using the vegan package in R \cite{oksanen2007vegan}.
 
 \paragraph{Unweighted UniFrac}\mbox{}\\
-Unweighted UniFrac is calculated based on the presence or absence of counts for each branch in the phylogenetic tree, when comparing two samples. A branch is unshared when one sample has a non-zero abundance but not the other, and a branch is shared when both samples have a non-zero abundance. The formula for unweighted UniFrac is as follows, where $b$ is the set of branch lengths in the phylogenetic tree, and $A$ and $B$ represent the two samples being compared:
+Unweighted UniFrac is calculated based on the presence or absence of counts for each branch in the phylogenetic tree, when comparing two samples. A branch belongs to a sample when at least one of the OTUs in the leaves below it have a non-zero abundance. The formula for unweighted UniFrac is as follows, where $b$ is the set of branch lengths in the phylogenetic tree, and $A$ and $B$ represent the two samples being compared:
 
 \begin{align*}
-Unweighted_{AB} = \frac{\sum_{}{} (b_{A} - b_{B}) \cup (b_{B} - b_{A})}{\sum_{}{} b_{A} \cup b_{B}}
+Unweighted_{AB} = \frac{\sum_{}{} b_{A} \triangle b_{B}}{\sum_{}{} b_{A} \cup b_{B}}
 \end{align*}
+
+The sum of the branch lengths that belong to one sample but not the other is divided by the sum of the branch lengths that belong to one or both samples.
 
 \paragraph{Weighted UniFrac}\mbox{}\\
 Weighted UniFrac \cite{lozupone2007quantitative} also incorporates each branch length of the phylogenetic tree, and weights them according to proportional abundance of the two samples. The formula for weighed UniFrac is as follows, where $A$ and $B$ are the two samples, $b$ is the set of branch lengths, and $\frac{A_{i}}{A_{T}}$ and $\frac{B_{i}}{B_{T}}$ are the proportional abundances associated with branch length $b_{i}$:
