@@ -325,9 +325,14 @@ C_{ij} &= 1 - \frac{2C_{ij}}{S_{i} + S_{j}} \\
 \end{align*}
 
 \subsection{Data preparation}
+The data used comes in the form of a table of counts per operational taxonomic unit per sample, plus a phylogenetic tree. All of our data are derived from 16S rRNA gene tag sequencing experiments.
 
 \paragraph{Tongue dorsum data set}\mbox{}\\
-Samples from this experiment were sourced from the Human Microbiome Project \cite{turnbaugh2007human} Qiime Community profiling v35 otu tables (\url{http://hmpdacc.org/HMQCP/}). Analysis of the data was conducted on a Late 2011 15 inch MacBook Pro 2.4 GHz i7 with 16GB of 1333 MHz DDR3 RAM. Rarefaction was conducted through Qiime version 1.8.0-20140103, and generation of the ellipse figures was done in R version 3.2.3 (2015-12-10) "Wooden Christmas-Tree" x86\_64-apple-darwin13.4.0 (64 bit).
+The tongue dorsum data set is a collection of 60 microbiome samples taken from the tongues of healthy participants.
+
+Samples from this experiment were sourced from the Human Microbiome Project \cite{turnbaugh2007human} Qiime Community profiling v35 otu tables (\url{http://hmpdacc.org/HMQCP/}).
+
+Analysis of the data was conducted on a Late 2011 15 inch MacBook Pro 2.4 GHz i7 with 16GB of 1333 MHz DDR3 RAM. Rarefaction was conducted through Qiime version 1.8.0-20140103, and generation of the ellipse figures was done in R version 3.2.3 (2015-12-10) "Wooden Christmas-Tree" x86\_64-apple-darwin13.4.0 (64 bit).
 
 A principal coordinate analysis is drawn from each distance matrix per metric, and for the first principal coordinate of each metric, Vres is computed per each first principal coordinate as defined by the formula:
 
@@ -339,16 +344,18 @@ A principal coordinate analysis is drawn from each distance matrix per metric, a
 \end{align*}
 
 \paragraph{Tongue dorsum and buccal mucosa data set}\mbox{}\\
+The tongue dorsum and buccal mucosa data set is a collection of 30 microbiome samples taken from the tongues of healthy participants, plus 30 microbiome samples taken from the buccal mucosa (cheek) of a different set of healthy participants.
 
-Thirty random samples were selected from the tongue site of the Human Microbiome Project \cite{turnbaugh2007human} and 30 random samples from the buccal mucosa site. Samples were filtered so that only samples with 5000 to 10,000 reads were included.
+To create this data set, thirty random samples were selected from the tongue site of the Human Microbiome Project \cite{turnbaugh2007human} and thirty random samples from the buccal mucosa site. Samples were filtered so that only samples with 5000 to 10,000 reads were included.
 
 Read counts from the HMP data set were rarefied to the smallest total read count per sample using the vegan R package \cite{oksanen2007vegan} before the unweighted UniFrac distance was calculated. Weighted, information, and centered log UniFrac were calculated on the data set without rarefaction. The resulting distances were plotted for principal coordinate analysis.
 
 The script used to run this analysis can be referenced at \url{https://github.com/ruthgrace/exponentUnifrac/blob/master/tongue_cheek_script.r}.
 
 \paragraph{Breast milk data set}\mbox{}\\
+The breast milk data set is a collection of 58 microbiome samples taken from lactating Caucasian Canadian women. The breast milk data set used here has also been published in the Microbiome Journal \cite{urbaniak2016human}.
 
-The breast milk data set used here has also been published in the Microbiome Journal \cite{urbaniak2016human}. The count table was analyzed using our custom UniFrac script. Data was rarefied to the sample with the smallest number of read counts (3072) before the unweighted UniFrac distance matrix was calculated. Non-rarefied data was used for weighted, information, and centered ratio UniFrac. Data was plotted using a principal components or coordinate analysis as appropriate.
+The count table was analyzed using our custom UniFrac script. Data was rarefied to the sample with the smallest number of read counts (3072) before the unweighted UniFrac distance matrix was calculated. Non-rarefied data was used for weighted, information, and centered ratio UniFrac. Data was plotted using a principal components or coordinate analysis as appropriate.
 
 The script used to run this analysis can be referenced at \url{https://github.com/ruthgrace/exponentUnifrac/blob/master/breastmilk_script.r}.
 
