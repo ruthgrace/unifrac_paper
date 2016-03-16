@@ -109,6 +109,16 @@
 % rotating package for sideways tables
 \usepackage{rotating}
 
+% Make subsections numbered 1, 2, 3 ... instead of 0.1, 0.2, 0.3 ... as requested by GLBIO/CCBC 2016 reviewer.
+
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\makeatletter
+\def\@seccntformat#1{\@ifundefined{#1@cntformat}%
+   {\csname the#1\endcsname\quad}%       default
+   {\csname #1@cntformat\endcsname}}%    enable individual control
+\newcommand\section@cntformat{}
+\makeatother
+
 % Remove comment for double spacing
 %\usepackage{setspace} 
 %\doublespacing
