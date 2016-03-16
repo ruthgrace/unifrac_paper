@@ -218,8 +218,16 @@ Microbiome analysis is frequently performed using the UniFrac distance metric to
 \section*{Introduction}
 In 2005, Lozupone et al introduced the UniFrac distance metric, a measure to calculate the difference between microbiomes that incorporated phylogenetic distance \cite{lozupone2005unifrac}. The goal of UniFrac was to enable objective comparison between microbiome samples from different conditions. In 2007, Lozupone added a proportional weighting to the original unweighted method \cite{lozupone2007quantitative}. Since then, papers reporting these metrics have garnered over a thousand citations, and enabled research about everything from how kwashiorkor causes malnutrition \cite{smith2013gut} to how people can have similar microbiomes to their pet dogs \cite{song2013cohabiting}. Except for generalized UniFrac, used to make hybrid unweighted and weighted UniFrac comparisons \cite{chen2012associating}, few advances in the metric have occurred since 2007. In this paper we examine a data set where unweighted UniFrac gives misleading results, and discuss some alternative weightings for UniFrac.
 
+\subsection{Data}
+UniFrac requires two pieces of data: A phylogenetic tree and a table of counts per inferred taxa per sample. This data is derived from a gene tag experiment, the most common of which is the 16S rRNA gene tag experiment for microbiome research [CITE]. A gene tag experiment is run by amplifying the gene tag through PCR, and then sequencing the resulting amplicon.
+
+\paragraph{Operational Taxonomic Units}\mbox{}\\
+An operational taxonomic unit is a 
+
+\paragraph{Phylogenetic tree}\mbox{}\\
+
 \subsection{Unweighted UniFrac}
-Unweighted UniFrac \cite{lozupone2005unifrac} uses an inferred evolutionary distance to measure similarity between samples. It requires a reference phylogenetic tree containing all the taxa present in the samples to be examined. The calculation is performed by dividing the branch lengths shared between the two samples by the branch lengths covered by either sample. A distance of 0 means that the samples are identical, and a distance of 1 means that the two samples share no taxa in common.
+Unweighted UniFrac \cite{lozupone2005unifrac} uses an inferred evolutionary distance to measure similarity between samples. It requires a reference phylogenetic tree containing all the taxa present in the samples to be examined, plus information about which taxa were detected in each sample. The calculation is performed by dividing the branch lengths shared between the two samples by the branch lengths covered by either sample. A distance of 0 means that the samples are identical, and a distance of 1 means that the two samples share no taxa in common.
 
 \begin{figure}[h]
 \includegraphics[scale=0.5]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/unifrac_distance.eps}
