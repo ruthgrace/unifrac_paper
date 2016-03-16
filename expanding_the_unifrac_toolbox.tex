@@ -222,7 +222,13 @@ In 2005, Lozupone et al introduced the UniFrac distance metric, a measure to cal
 UniFrac requires two pieces of data: A phylogenetic tree and a table of counts per inferred taxa per sample. This data is derived from a gene tag experiment, the most common of which is the 16S rRNA gene tag experiment for microbiome research [CITE]. A gene tag experiment is run by amplifying the gene tag through PCR, and then sequencing the resulting amplicon.
 
 \paragraph{Operational Taxonomic Units}\mbox{}\\
-An operational taxonomic unit is a 
+Unlike more distinct species, such as mammalian species, bacterial species are not well defined. Bacterial genomes are highly variable, and regions used to identify bacteria vary in a continuum rather than clusters of similar sequences.
+
+Historically bacteria that are have 97\% identity in a variable region are considered to be the same taxa. The 97\% cutoff was arbitrarily chosen to best map sequence data to bacterial classifications. This threshold maximizes the grouping of bacteria classified as the same species while minimizing the grouping of bacteria classified as different species. Before sequencing bacterial classification was often done by appearance or by metabolic products, so there are outliers where bacteria classified in the same species are actually genetically very different, or bacteria classified in different genus are genetically very similar.
+
+However, it is difficult to determine how a batch of sequences should be partitioned into groups of 97\% identity. One way is to perform a clustering algorithm that optimally partitions the groups and then later assign taxonomic identity by matching the sequences with public databases. Another way is to start off with seed sequences from known bacteria and perform the clustering such that the 97\% identity groups are centered on the seed sequences. In any case, the resulting taxonomic groupings are known as Operational Taxonomic Units (OTUs), and are used consistently within the same experiment. While OTUs can be annotated with standard taxonomic names such that results can be compared between experiments, technically the taxonomic groupings used by different experiments are not the same.
+
+Grouping of amplicon sequences into OTUs allows for the data to be summarized into a table of counts per OTU per sample.
 
 \paragraph{Phylogenetic tree}\mbox{}\\
 
