@@ -231,6 +231,9 @@ However, it is difficult to determine how a batch of sequences should be partiti
 Grouping of amplicon sequences into OTUs allows for the data to be summarized into a table of counts per OTU per sample.
 
 \paragraph{Phylogenetic tree}\mbox{}\\
+To generate the phylogenetic tree, a representative sequence is taken from each of the cluster of sequences that belong to each OTU. If seed sequences were used to generate the OTU, then these can be used for the phylogenetic tree, otherwise a sequence in the center of the cluster should be selected.
+
+The phylogenetic tree is created through a multiple sequence alignment with the representative OTU sequences, using software such as MUSCLE. Each leaf of the tree represents one of the OTUs, and each of the branches of the tree has a length. Additionally, the tree needs to be rooted for the UniFrac calculation to be performed. This can be done by rooting the tree by its midpoint.
 
 \subsection{Unweighted UniFrac}
 Unweighted UniFrac \cite{lozupone2005unifrac} uses an inferred evolutionary distance to measure similarity between samples. It requires a reference phylogenetic tree containing all the taxa present in the samples to be examined, plus information about which taxa were detected in each sample. The calculation is performed by dividing the branch lengths shared between the two samples by the branch lengths covered by either sample. A distance of 0 means that the samples are identical, and a distance of 1 means that the two samples share no taxa in common.
