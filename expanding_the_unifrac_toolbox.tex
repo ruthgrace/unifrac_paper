@@ -240,13 +240,9 @@ Grouping of amplicon sequences into OTUs allows for the data to be summarized in
 \subsection{Data}
 UniFrac requires two pieces of information: phylogenetic tree and a table of counts per inferred taxa per sample. These are derived from a gene tag sequencing experiment, such as the commonly used 16S rRNA gene \cite{tringe2008renaissance}. The sequenced gene contains a variable region, allowing the sequences to be grouped into OTUs as described in the previous section. A count table can then be generated with the number of reads per OTU per sample. The center sequence of each OTU group can be put into a multiple sequence alignment, from which a phylogenetic tree can be inferred.
 
+The phylogenetic tree is created through a multiple sequence alignment with the representative OTU sequences, using software such as MUSCLE \cite{edgar2004muscle}, or using a guide tree, such as through Greengenes \cite{desantis2006greengenes} or the QIIME software \cite{caporaso2010qiime}. Each leaf of the tree represents one of the OTUs, and each of the branches of the tree has a length. Additionally, the tree needs to be rooted for the UniFrac calculation to be performed. This is often done by rooting the tree at its midpoint.
+
 \subsection{Compositional Data Analysis}
-
-
-\paragraph{Phylogenetic tree}\mbox{}\\
-To generate the phylogenetic tree \cite{ciccarelli2006toward}, a representative sequence is taken from each of the cluster of sequences that belong to each OTU. If seed sequences were used to generate the OTU, then these can be used for the phylogenetic tree, otherwise a sequence in the center of the cluster should be selected.
-
-The phylogenetic tree is created through a multiple sequence alignment with the representative OTU sequences, using software such as MUSCLE \cite{edgar2004muscle}. Each leaf of the tree represents one of the OTUs, and each of the branches of the tree has a length. Additionally, the tree needs to be rooted for the UniFrac calculation to be performed. This can be done by rooting the tree by its midpoint, which can be performed by software such as the phangorn R package \cite{schliep2011phangorn}.
 
 \subsection{Unweighted UniFrac}
 Unweighted UniFrac \cite{lozupone2005unifrac} uses an inferred evolutionary distance to measure similarity between samples. It requires a reference phylogenetic tree containing all the taxa present in the samples to be examined, plus information about which taxa were detected in each sample. The calculation is performed by dividing the branch lengths that are not shared between the two samples by the branch lengths covered by either sample. A distance of 0 means that the samples are identical, and a distance of 1 means that the two samples share no taxa in common.
