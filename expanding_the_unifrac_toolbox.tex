@@ -352,7 +352,7 @@ Samples from this experiment were sourced from the Human Microbiome Project \cit
 
 Rarefaction was conducted through Qiime version 1.8.0-20140103 to 659 reads (the lowest number of reads for a sample), and generation of the ellipse figures was done in R version 3.2.3 (2015-12-10) "Wooden Christmas-Tree" x86\_64-apple-darwin13.4.0 (64 bit).
 
-A principal coordinate analysis is drawn from each distance matrix per metric, and for the first principal coordinate of each metric, Vres is computed per each first principal coordinate as defined by the formula:
+A principal component analysis is drawn from each distance matrix per metric, and for the first principal component of each metric, the resultant value ($V_{res}$) is computed per each first principal component as defined by the formula:
 
 \begin{align*}
   V_{res} &=\frac{|V_1 - V_i|}{range(V_1, V_i)} \\
@@ -366,12 +366,12 @@ The tongue dorsum and buccal mucosa data set is a collection of 30 microbiome sa
 
 To create this data set, thirty random samples were selected from the tongue site of the Human Microbiome Project \cite{turnbaugh2007human} and thirty random samples from the buccal mucosa site. Samples were filtered so that only samples with 5000 to 10,000 reads were included.
 
-Read counts from the HMP data set were rarefied to the smallest total read count per sample using the vegan R package \cite{oksanen2007vegan} before the unweighted UniFrac distance was calculated. Weighted, information, and ratio UniFrac were calculated on the data set without rarefaction. The resulting distances were plotted for principal coordinate analysis.
+Read counts from the HMP data set were rarefied to the smallest total read count per sample using the vegan R package \cite{oksanen2007vegan} before the unweighted UniFrac distance was calculated. Weighted, information, and ratio UniFrac were calculated on the data set without rarefaction. The resulting distances were plotted for principal component analysis.
 
 The script used to run this analysis can be referenced at \url{https://github.com/ruthgrace/exponentUnifrac/blob/master/tongue_cheek_script.r}.
 
 \paragraph{Breast milk data set}\mbox{}\\
-The breast milk data set is a collection of 58 microbiome samples taken from lactating Caucasian Canadian women. The breast milk data set used here has also been published in the Microbiome Journal \cite{urbaniak2016human}. There were a total of 5318357 reads across 115 OTUs, and a minimum and maximum of 3072 and 2791000 reads per sample. Note that 2790735 reads came from a sample that was taken from a patient with an infection, and the next largest number of reads per sample was 282485 (ten times less).
+The breast milk data set is a collection of 58 microbiome samples taken from lactating Caucasian Canadian women. The breast milk data set used here has also been published in a recent study \cite{urbaniak2016human}. There were a total of 5318357 reads across 115 OTUs, and a minimum and maximum of 3072 and 2791000 reads per sample. Note that 2790735 reads came from a sample that was taken from a patient with an infection, and the next largest number of reads per sample was 282485 (ten times less).
 
 The count table was analyzed using our custom UniFrac script. Data was rarefied to the sample with the smallest number of read counts (3072) before the unweighted UniFrac distance matrix was calculated. Non-rarefied data was used for weighted, information, and ratio UniFrac. Data was plotted using a principal components or coordinate analysis as appropriate.
 
@@ -386,14 +386,14 @@ A commentary by Lozupone et al. 2011 \cite{lozupone2011unifrac} addressed the se
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/sample_migration.eps}
-\caption{{\bf Sample migration in different rarefactions, plotted on principal coordinates, measured with unweighted UniFrac.}
-Red samples have moved from the left cluster to the right cluster between rarefactions. Blue samples have moved from the right cluster to the left. Samples are taken from the tongue dorsum body site from the Human Microbiome Project database. If the experiment were run once, one might mistakenly assume that there are two clusters of data, however, the inconsistent sample membership of the two groups between rarefactions proves the clustering irreproducible. Note that the variance explained by the first and second coordinate is merely 16.1\% and 9.8\% respectively, indicating that the data is rather spherical, even though the points on the plot appear to show two separated clusters.}
+\caption{{\bf Sample migration in different rarefactions, plotted on principal components, measured with unweighted UniFrac.}
+Red samples have moved from the left cluster to the right cluster between rarefactions. Blue samples have moved from the right cluster to the left. Samples are taken from the tongue dorsum body site from the Human Microbiome Project database. If the experiment were run once, one might mistakenly assume that there are two clusters of data, however, the inconsistent sample membership of the two groups between rarefactions proves the clustering irreproducible. Note that the variance explained by the first and second component is merely 16.1\% and 9.8\% respectively, indicating that the data is rather spherical, even though the points on the plot appear to show two separated clusters.}
 \label{fig2}
 \end{figure}
 
 Sixty tongue dorsum subsamples were drawn from the Human Microbiome Project data without replacement. Rare OTUs with less than 100 total counts across all the samples were removed. The minimum sample count for the subset of 60 we analyzed was 659, therefore we rarefied (subsampled) to the minimum of 659 to normalize the samples. For Fig.~\ref{fig2}, two independent rarefactions of the data were conducted in order to observe the effect of rarefaction variants on the metrics. The unweighted UniFrac distance was then computed for each rarefaction, and Procrustes adjustment was applied in order to overlay the second rarefaction onto the first. A PCA of rarefaction 1 was plotted, and any samples that changed between rarefactions one and two were visualized with red and blue on the plot. If the sample moved from one cluster to another between the rarefactions, it was indicated with either a blue or a red arrow. 
 
-In both rarefactions on Fig.~\ref{fig2}, samples separated distinctly into two clusters on principal coordinate 1. Principal coordinate 1 explains the most variation in the data, and is thus useful to visualize if any associated metadata is behind the sample separation. However, the separation was not explainable by any metadata associated with the HMP experiment, and is thus an undesirable result. When plotting the rarefactions against each other, various samples are observed moving between the various clusters. This example demonstrates that samples with little difference can appear to be different through the unweighted UniFrac distance metric.
+In both rarefactions on Fig.~\ref{fig2}, samples separated distinctly into two clusters on principal component 1. Principal component 1 explains the most variation in the data, and is thus useful to visualize if any associated metadata is behind the sample separation. However, the separation was not explainable by any metadata associated with the HMP experiment, and is thus an undesirable result. When plotting the rarefactions against each other, various samples are observed moving between the various clusters. This example demonstrates that samples with little difference can appear to be different through the unweighted UniFrac distance metric.
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/ellipses.eps}
@@ -478,24 +478,24 @@ Near the 0, 0 point in Fig.~\ref{fig5}, the proportional abundances are low. Her
 \begin{figure}[h]
 \includegraphics[scale=0.8]{tongue_cheek.eps}
 \caption{{\bf Analysis of tongue and buccal mucosa data using different UniFrac weightings. }
-A principal coordinate analysis of a 16S rRNA experiment done on samples from the tongue and buccal mucosa, selected from the Human Microbiome Project \cite{turnbaugh2007human}. All weightings and the Bray-Curtis dissimilarity show separation between the samples by body site. Note that the variance explained by the first and second principal coordinate axis is higher than in the tongue-tongue data set from Figure 2, which had 16.1\% and 9.8\% variance explained, respectively.}
+A principal component analysis of a 16S rRNA experiment done on samples from the tongue and buccal mucosa, selected from the Human Microbiome Project \cite{turnbaugh2007human}. All weightings and the Bray-Curtis dissimilarity show separation between the samples by body site. Note that the variance explained by the first and second principal component axis is higher than in the tongue-tongue data set from Figure 2, which had 16.1\% and 9.8\% variance explained, respectively.}
 \label{fig6}
 \end{figure}
 
 We next explore two other datasets, one with a defined difference between groups (tongue dorsum compared to buccal mucosa), and one with an outlier that is only apparent when analyzed by certain dissimilarity metrics.
 
-Fig.~\ref{fig6} shows a principal coordinate analysis plot with four different metrics: unweighted UniFrac, weighted UniFrac, information UniFrac, and ratio UniFrac. We observe that the difference in the microbiome between the human tongue and buccal mucosa are well defined by all metrics (Fig.~\ref{fig6}), since all of the weightings show separation between the samples according to body site. We conclude from (Fig.~\ref{fig3}) that weighted UniFrac, information UniFrac, and ratio UniFrac do not tend to show spurious separation in uniform data sets to the degree that unweighted UniFrac does, while reliably separating samples in data with a defined difference between groups.
+Fig.~\ref{fig6} shows a principal component analysis plot with four different metrics: unweighted UniFrac, weighted UniFrac, information UniFrac, and ratio UniFrac. We observe that the difference in the microbiome between the human tongue and buccal mucosa are well defined by all metrics (Fig.~\ref{fig6}), since all of the weightings show separation between the samples according to body site. We conclude from (Fig.~\ref{fig3}) that weighted UniFrac, information UniFrac, and ratio UniFrac do not tend to show spurious separation in uniform data sets to the degree that unweighted UniFrac does, while reliably separating samples in data with a defined difference between groups.
 
 \subsection{Breast milk Data}
 
 \begin{figure}[h]
 \includegraphics[scale=0.8]{breastmilk.eps}
 \caption{{\bf Analysis of breast milk data using different UniFrac weightings. }
-A principal coordinate analysis of a 16S rRNA experiment done on samples from a 16S rRNA experiment on breast milk. The circled sample is infected with 97\% \textit{Pseudomonas}, compared to 15-20\% in the other samples. }
+A principal component analysis of a 16S rRNA experiment done on samples from a 16S rRNA experiment on breast milk. The circled sample is infected with 97\% \textit{Pseudomonas}, compared to 15-20\% in the other samples. }
 \label{fig7}
 \end{figure}
 
-Fig.~\ref{fig7} is a principal coordinate analysis of a 16S rRNA gene sequencing experiment done on microbiome samples from breast milk \cite{urbaniak2016human}. Breast milk samples were collected and the V4 region of the 16S rRNA gene was sequenced. One of the patients who provided a sample had an active infection, producing a sample that consisted of 97\% Pasteurella. We noted that this sample was not distinct in unweighted and weighted UniFrac because the distance from the Pasteurella branches of the phylogenetic tree to the root of the tree (rooted by midpoint) were not particularly short or long, measuring at just over the 3rd quartile of all root-to-leaf distances. In addition, the Pasteurella leaves shared a clade with many other taxa.
+Fig.~\ref{fig7} is a principal component analysis of a 16S rRNA gene sequencing experiment done on microbiome samples from breast milk \cite{urbaniak2016human}. Breast milk samples were collected and the V4 region of the 16S rRNA gene was sequenced. One of the patients who provided a sample had an active infection, producing a sample that consisted of 97\% Pasteurella. We noted that this sample was not distinct in unweighted and weighted UniFrac because the distance from the Pasteurella branches of the phylogenetic tree to the root of the tree (rooted by midpoint) were not particularly short or long, measuring at just over the 3rd quartile of all root-to-leaf distances. In addition, the Pasteurella leaves shared a clade with many other taxa.
 
 The reason the infected sample in the breast milk study is so distinct from the rest of the samples in Information UniFrac and Ratio UniFrac is because of the weighting. The infected sample was 97\% Pasteurella, while the other samples generally had 15-20\% each of Staphylococcus and Pseudomonas, and little or no Pasteurella. Unweighted UniFrac does not differentiate between high and low abundance. Weighted UniFrac does, placing the infected sample in the bottom right corner of that plot. Information UniFrac weights everything in the infected sample close to zero, as taxa are present in either very high or very low abundance, while weighting Staphylococcus and Pseudomonas in the other samples highly (around 0.4) due to their 15-20\% abundance. Ratio UniFrac recognizes that the infected sample has a taxonomic abundance very far from the geometric mean abundance. For these reasons information and ratio UniFrac are more adept at picking up outliers with uneven distributions, even if the taxa are shared by other samples.
 
