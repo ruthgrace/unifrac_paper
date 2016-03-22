@@ -250,7 +250,7 @@ First, the total number of reads per sample is influenced by sample collection, 
 To ensure that these conditions are met, data should be analyzed in a compositional way. In Euclidean space, data points can increase or decrease freely. Compositional data is under a sum constraint, and exist in a non-Euclidean space known as the Aitchison simplex \cite{aitchison1982statistical}. A data transformation can be performed to put the data into Euclidean space, so that it can be analyzed with standard statistical methods that depend on Cartesian coordinates and linear relationships. These transformations involve examining the ratios of different OTU abundances to each other, so that the total number of reads do not unduly affect the result.
 
 \subsection{Unweighted UniFrac}
-Unweighted UniFrac \cite{lozupone2005unifrac} uses an inferred evolutionary distance to measure similarity between samples. It requires a reference phylogenetic tree containing all the taxa present in the samples to be examined, plus information about which taxa were detected in each sample. The calculation is performed by dividing the branch lengths that are not shared between the two samples by the branch lengths covered by either sample. A distance of 0 means that the samples are identical, and a distance of 1 means that the two samples share no taxa in common.
+Unweighted UniFrac \cite{lozupone2005unifrac} uses an inferred evolutionary distance to measure similarity between samples. It requires a reference phylogenetic tree containing all the taxa present in the samples to be examined, plus information about which taxa were detected in each sample. The calculation is performed by dividing the branch lengths that are not shared between the two samples by the branch lengths covered by either sample. Figure ~\ref{fig1} shows example calcualtions for UniFrac based on the tree overlap. A distance of 0 means that the samples are identical, and a distance of 1 means that the two samples share no taxa in common.
 
 \begin{figure}[h]
 \includegraphics[scale=0.5]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/unifrac_distance.eps}
@@ -259,7 +259,7 @@ When two samples do not share any branches of the phylogenetic tree, the unweigh
 \label{fig1}
 \end{figure}
 
-As UniFrac is a presence/absence test, it is sensitive to sequencing depth, and assumes that the data has been rarefied to a common sequencing depth \cite{lozupone2011unifrac}, and rarefaction prior to unweighted UniFrac has become a standard part of the microbiome analysis workflow, with built in rarefaction functions in QIIME \cite{caporaso2010qiime} and mothur \cite{schloss2009introducing}.
+As UniFrac is a binary test of absence, it is sensitive to sequencing depth, and assumes that the data has been normalized to a common sequencing depth \cite{lozupone2011unifrac}, and rarefaction prior to unweighted UniFrac has become a standard part of the microbiome analysis workflow, with built in rarefaction functions in QIIME \cite{caporaso2010qiime} and mothur \cite{schloss2009introducing}.
 
 \subsection{Weighted UniFrac}
 Weighted UniFrac \cite{lozupone2007quantitative} is an implementation of the Kantorovich–Rubinstein distance in mathematics, also known as the earth mover’s distance \cite{evans2012phylogenetic}. Rather than looking only at the presence or absence of taxa, each branch length of the phylogenetic tree is weighted by the difference in proportional abundance of the taxa between the two samples.
