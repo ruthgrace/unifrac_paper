@@ -338,7 +338,7 @@ One challenge when it comes to the analysis of read count data is that the data 
 
 The use of ratio weighting for UniFrac produces measurements that violate the metric triangle inequality, such that Euclidean statistics are technically invalid. Thus this metric, like the Bray-Curtis metric, is a dissimilarity, not a distance.
 
-For this paper, we calculate UniFrac metrics using a custom R script, which includes unweighted UniFrac, weighted UniFrac, information UniFrac, and ratio UniFrac: https://github.com/ruthgrace/exponentUnifrac/blob/master/UniFrac.r
+For this paper, we calculate UniFrac metrics using a custom R script, which includes unweighted UniFrac, weighted UniFrac, information UniFrac, and ratio UniFrac: \url{https://github.com/ruthgrace/ruth_unifrac_workshop}
 
 \paragraph{Bray-Curtis dissimilarity metric}\mbox{}\\
 The Bray Curtis dissimilarity metric \cite{beals1984bray} quantifies how dissimilar two sites are based on counts. A Bray-Curtis index of 0 means that two samples are identical, while a Bray-Curtis index of 1 means samples do not share any species. It is computed as a proportion through the formula:
@@ -351,7 +351,7 @@ C_{ij} &= 1 - \frac{2C_{ij}}{S_{i} + S_{j}} \\
 \end{align*}
 
 \subsection{Data preparation}
-The data used comes in the form of a table of counts per operational taxonomic unit per sample, plus a phylogenetic tree. All of our data are derived from 16S rRNA gene tag sequencing experiments.
+The data used comes in the form of a table of counts per operational taxonomic unit per sample, plus a phylogenetic tree. All of our data are derived from 16S rRNA gene tag sequencing experiments, and the data and scripts can be accessed at \url{https://github.com/JRWu/R_Scripts}.
 
 \paragraph{Tongue dorsum data set}\mbox{}\\
 The tongue dorsum data set is a collection of 60 microbiome samples taken from the tongues of healthy participants. There were 324789 reads across 554 OTUs, and a minimum and maximum of 659 and 17176 reads per sample.
@@ -376,14 +376,10 @@ To create this data set, thirty random samples were selected from the tongue sit
 
 Read counts from the HMP data set were rarefied to the smallest total read count per sample using the vegan R package \cite{oksanen2007vegan} before the unweighted UniFrac distance was calculated. Weighted, information, and ratio UniFrac were calculated on the data set without rarefaction. The resulting distances were plotted for principal component analysis.
 
-The script used to run this analysis can be referenced at \url{https://github.com/ruthgrace/exponentUnifrac/blob/master/tongue_cheek_script.r}.
-
 \paragraph{Breast milk data set}\mbox{}\\
 The breast milk data set is a collection of 58 microbiome samples taken from lactating Caucasian Canadian women. The breast milk data set used here has also been published in a recent study \cite{urbaniak2016human}. There were a total of 5318357 reads across 115 OTUs, and a minimum and maximum of 3072 and 2791000 reads per sample. Note that 2790735 reads came from a sample that was taken from a patient with an infection, and the next largest number of reads per sample was 282485 (ten times less).
 
 The count table was analyzed using our custom UniFrac script, which can be accessed at \url{https://github.com/ruthgrace/ruth_unifrac_workshop}. Data was rarefied to the sample with the smallest number of read counts (3072) before the unweighted UniFrac distance matrix was calculated. Non-rarefied data was used for weighted, information, and ratio UniFrac. Data was plotted using a principal components or coordinate analysis as appropriate.
-
-The script used to run this analysis can be referenced at \url{https://github.com/ruthgrace/exponentUnifrac/blob/master/breastmilk_script.r}.
 
 \paragraph{Monoculture data set}\mbox{}\\
 The monoculture data set is simulated based on the infected sample from the breast milk data set. Each simulated sample has exactly the same counts per taxa as the infected sample, except that the taxa are shuffled. After taxa shuffling, the data was manipulated into two groups. In one set of 20 samples the taxa with the highest count was swapped with \textit{Pasteurella}, in another set of 20 the taxa with the highest count was swapped with \textit{Staphylococcus}, and in the last set of 20 the taxa with the highest count was swapped with \textit{Pseudomonas}. These three taxa were picked because they were the most highly abundant in the original breast milk data set. This process produced three sets of monocultures, dominated by the three different taxa.
@@ -488,16 +484,16 @@ We next explore two other datasets, one with a defined difference between groups
 
 Fig.~\ref{fig6} shows a principal component analysis plot with four different metrics: unweighted UniFrac, weighted UniFrac, information UniFrac, and ratio UniFrac. We observe that the difference in the microbiome between the human tongue and buccal mucosa are well defined by all metrics (Fig.~\ref{fig6}), since all of the weightings show separation between the samples according to body site. We conclude from (Fig.~\ref{fig3}) that weighted UniFrac, information UniFrac, and ratio UniFrac do not tend to show spurious separation in uniform data sets to the degree that unweighted UniFrac does, while reliably separating samples in data with a defined difference between groups.
 
-\begin{figure}[h]
-\includegraphics[scale=0.8]{monoculture.eps}
-\caption{{\bf Analysis of tongue and buccal mucosa data using different UniFrac weightings. }
-A principal component analysis of a 16S rRNA experiment done on samples from the tongue and buccal mucosa, selected from the Human Microbiome Project \cite{turnbaugh2007human}. All weightings and the Bray-Curtis dissimilarity show separation between the samples by body site. Note that the variance explained by the first and second principal component axis is higher than in the tongue-tongue data set from Figure 2, which had 16.1\% and 9.8\% variance explained, respectively.}
-\label{fig6}
-\end{figure}
-
 \FloatBarrier
 
 \subsection{Breast milk Data}
+
+\begin{figure}[h]
+\includegraphics[scale=0.8]{breastmilk.eps}
+\caption{{\bf Analysis of simulated monocultures using different UniFrac weightings. }
+A principal component analysis of a simulated 16S rRNA experiment based on the breast milk data. Red samples are dominated at 07\% by \textit{Pasteurella}, black samples are dominated by \textit{Staphylococcus}, and cyan samples are dominated by \textit{Pseudomonas}. Note that while information Unifrac appears to separate the samples reasonably well visually, the amount of variance explained by the first two components is much lower than even weighted UniFrac.}
+\label{fig7}
+\end{figure}
 
 Fig.~\ref{fig7} is a principal component analysis of a 16S rRNA gene sequencing experiment done on microbiome samples from breast milk \cite{urbaniak2016human}. Breast milk samples were collected and the V4 region of the 16S rRNA gene was sequenced. One of the patients who provided a sample had an active infection, producing a sample that consisted of 97\% Pasteurella. We noted that this sample was not distinct in unweighted and weighted UniFrac because the distance from the Pasteurella branches of the phylogenetic tree to the root of the tree (rooted by midpoint) were not particularly short or long, measuring at just over the 3rd quartile of all root-to-leaf distances. In addition, the Pasteurella leaves shared a clade with many other taxa.
 
@@ -524,6 +520,8 @@ If the samples are hierarchically clustered, the three groups separate perfectly
 As shown in the tongue and buccal mucosa data set, unweighted UniFrac is perfectly sufficient for data sets with a notable difference. However, in data sets with no difference or a very small difference between groups such the uniform tongue dorsum data set, unweighted UniFrac is the least reliable and we found that it may produce wildly different results depending on rarefaction and sequencing depth. This can result in spurious groups, or inclusion of samples in the wrong groups.
 
 We found weighted UniFrac, information UniFrac, ratio UniFrac, and Bray-Curtis methods to be more reliable choices. We suggest that investigators use several methods as they can detect outliers in different circumstances. When an outlier is detected by any metric, an investigation is warranted, as with our example in the breast milk data set.
+
+We do not believe that any of these weightings are a perfect model for microbiome data. Each tool is prone to its own set of weaknesses. Information UniFrac and ratio UniFrac are useful for examining data sets that contain the similar sets of taxa between groups. Weighted and ratio UniFrac are useful for examining data sets that are close to monocultures. In any case, inspection should be done to make sure that the tool used accurately represents the data.
 
 In summary, with the addition of information UniFrac and ratio UniFrac, biologists have more tools at their disposal to prevent spurious interpretations, detect outliers, and ultimately understand their data better.
 
