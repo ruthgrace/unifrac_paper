@@ -354,7 +354,7 @@ C_{ij} &= 1 - \frac{2C_{ij}}{S_{i} + S_{j}} \\
 The data used comes in the form of a table of counts per operational taxonomic unit per sample, plus a phylogenetic tree. All of our data are derived from 16S rRNA gene tag sequencing experiments, and the data and scripts can be accessed at \url{https://github.com/JRWu/R_Scripts}.
 
 \paragraph{Tongue dorsum data set}\mbox{}\\
-The tongue dorsum data set is a collection of 60 microbiome samples taken from the tongues of healthy participants. There were 324789 reads across 554 OTUs, and a minimum and maximum of 659 and 17176 reads per sample.
+The tongue dorsum data set is a collection of 60 microbiome samples taken from the tongues of healthy participants. There were 0.3 million reads across 554 OTUs, and a minimum and maximum of 659 and 17176 reads per sample.
 
 Samples from this experiment were sourced from the Human Microbiome Project \cite{turnbaugh2007human} Qiime Community profiling v35 otu tables (\url{http://hmpdacc.org/HMQCP/}).
 
@@ -370,14 +370,14 @@ A principal component analysis is drawn from each distance matrix per metric, an
 \end{align*}
 
 \paragraph{Tongue dorsum and buccal mucosa data set}\mbox{}\\
-The tongue dorsum and buccal mucosa data set is a collection of 30 microbiome samples taken from the tongues of healthy participants, plus 30 microbiome samples taken from the buccal mucosa (cheek) of a different set of healthy participants. There were 399188 reads across 12701 OTUs, and a minimum and maximum of 5028 and 9861 reads per sample. Note that if the OTUs that are less than 1\% abundant in all samples are filtered out, only 179 OTUs remain.
+The tongue dorsum and buccal mucosa data set is a collection of 30 microbiome samples taken from the tongues of healthy participants, plus 30 microbiome samples taken from the buccal mucosa (cheek) of a different set of healthy participants. There were 0.4 million reads across 12701 OTUs, and a minimum and maximum of 5028 and 9861 reads per sample. Note that if the OTUs that are less than 1\% abundant in all samples are filtered out, only 179 OTUs remain.
 
 To create this data set, thirty random samples were selected from the tongue site of the Human Microbiome Project \cite{turnbaugh2007human} and thirty random samples from the buccal mucosa site. Samples were filtered so that only samples with 5000 to 10,000 reads were included.
 
 Read counts from the HMP data set were rarefied to the smallest total read count per sample using the vegan R package \cite{oksanen2007vegan} before the unweighted UniFrac distance was calculated. Weighted, information, and ratio UniFrac were calculated on the data set without rarefaction. The resulting distances were plotted for principal component analysis.
 
 \paragraph{Breast milk data set}\mbox{}\\
-The breast milk data set is a collection of 58 microbiome samples taken from lactating Caucasian Canadian women. The breast milk data set used here has also been published in a recent study \cite{urbaniak2016human}. There were a total of 5318357 reads across 115 OTUs, and a minimum and maximum of 3072 and 2791000 reads per sample. Note that 2790735 reads came from a sample that was taken from a patient with an infection, and the next largest number of reads per sample was 282485 (ten times less).
+The breast milk data set is a collection of 58 microbiome samples taken from lactating Caucasian Canadian women. The breast milk data set used here has also been published in a recent study \cite{urbaniak2016human}. There were a total of 5.3 million reads across 115 OTUs, and a minimum and maximum of 3072 and 2.8 million reads per sample. Note that the 2.8 million reads came from a sample that was taken from a patient with an infection, and the next largest number of reads per sample was 282485 (ten times less).
 
 The count table was analyzed using our custom UniFrac script, which can be accessed at \url{https://github.com/ruthgrace/ruth_unifrac_workshop}. Data was rarefied to the sample with the smallest number of read counts (3072) before the unweighted UniFrac distance matrix was calculated. Non-rarefied data was used for weighted, information, and ratio UniFrac. Data was plotted using a principal components or coordinate analysis as appropriate.
 
@@ -506,11 +506,15 @@ The reason the infected sample in the breast milk study is so distinct from the 
 \begin{figure}[h]
 \includegraphics[scale=0.8]{monoculture.eps}
 \caption{{\bf Analysis of simulated monocultures using different UniFrac weightings. }
-A principal component analysis of a simulated 16S rRNA experiment based on the breast milk data. Red samples are dominated at 07\% by \textit{Pasteurella}, black samples are dominated by \textit{Staphylococcus}, and cyan samples are dominated by \textit{Pseudomonas}. Note that while information Unifrac appears to separate the samples reasonably well visually, the amount of variance explained by the first two components is much lower than even weighted UniFrac.}
+A principal component analysis of a simulated 16S rRNA experiment based on the breast milk data. Red samples are dominated at 97\% by \textit{Pasteurella}, black samples are dominated by \textit{Pseudomonas}, and cyan samples are dominated by \textit{Staphylococcus}. Note that while information Unifrac appears to separate the samples reasonably well visually, the amount of variance explained by the first two components is much lower than even weighted UniFrac.}
 \label{fig8}
 \end{figure}
 
-Information UniFrac is known to not perform very well for monocultures, due to taxa with very high and low proportional abundances having uncertainty information values close to zero (Fig.~\ref{fig5}).
+Each sample in the monoculture dataset is 97\% dominated by one of three taxa. However, within the remaining 3\% there is variation in the counts.
+
+Unweighted UniFrac, being binary test, detects only the variation in the remaining 3\% of counts, without showing the difference in the monocultures. Weighted UniFrac detects only the difference in the identity of the monoculture, and the separation is driven by phylogenetic distance - the pairwise distance from \textit{Pasteurella} to \textit{Staphylococcus} and \textit{Pseudomonas} to \textit{Staphylococcus} is just over 0.9 on the phylogenetic tree while the distance from \textit{Pasteurella} to \textit{Pseudomonas} is 0.45. This is in correspondence with the PCoA plot where the first component (which separates the \textit{Staphylococcus} species from the other two) explains over 90\% of the variance in the data set.
+
+Information UniFrac is known to not perform very well for monocultures, due to taxa with very high and low proportional abundances having uncertainty information values close to zero (Fig.~\ref{fig5}). While the samples separate visually with information UniFrac, the variance explained by the separation is low, and the distance matrix does not separate the three groups by hierarchical clustering. Ratio UniFrac and Bray Curtis both separate the samples by monoculture, and also differentiate the samples by their minor variations, showcasing a more representative perspective of this data set.
 
 If the samples are hierarchically clustered, the three groups separate perfectly with weighted UniFrac, ratio UniFrac, and  Bray Curtis dissimilarity, but not with unweighted UniFrac or information UniFrac.
 
@@ -521,7 +525,7 @@ As shown in the tongue and buccal mucosa data set, unweighted UniFrac is perfect
 
 We found weighted UniFrac, information UniFrac, ratio UniFrac, and Bray-Curtis methods to be more reliable choices. We suggest that investigators use several methods as they can detect outliers in different circumstances. When an outlier is detected by any metric, an investigation is warranted, as with our example in the breast milk data set.
 
-We do not believe that any of these weightings are a perfect model for microbiome data. Each tool is prone to its own set of weaknesses. Information UniFrac and ratio UniFrac are useful for examining data sets that contain the similar sets of taxa between groups. Weighted and ratio UniFrac are useful for examining data sets that are close to monocultures. In any case, inspection should be done to make sure that the tool used accurately represents the data.
+We do not believe that any of these weightings are a perfect model for microbiome data. Each tool is prone to its own set of weaknesses. If the difference in groups is driven by presence/absence then UniFrac is a reasonable choice. If the difference is driven by a linear abundance, then weighted UniFrac is a good choice. Information UniFrac and ratio UniFrac are useful for examining data sets that contain the similar sets of taxa between groups. Ratio UniFrac is especially good for examining data sets that have more subtle variations, due to its non linear nature. In any case, inspection should be done to make sure that the tool used accurately represents the data.
 
 In summary, with the addition of information UniFrac and ratio UniFrac, biologists have more tools at their disposal to prevent spurious interpretations, detect outliers, and ultimately understand their data better.
 
