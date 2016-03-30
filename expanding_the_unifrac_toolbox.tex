@@ -260,7 +260,7 @@ Unweighted UniFrac \cite{lozupone2005unifrac} uses an inferred evolutionary dist
 
 \begin{figure}[h]
 \includegraphics[scale=0.5]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/unifrac_distance.eps}
-\caption{{\bf Unweighted UniFrac.}
+\caption[Unweighted UniFrac.]{{\bf Unweighted UniFrac.}
 When two samples do not share any branches of the phylogenetic tree, the unweighted UniFrac distance is maximized at 1. When two samples share half of their branch lengths on the phylogenetic tree, the unweighted UniFrac distance is 0.5. If the two samples contain exactly the same taxa, the unweighted UniFrac distance is minimized at 0, since the samples share all branches.}
 \label{fig1}
 \end{figure}
@@ -393,7 +393,7 @@ A commentary by Lozupone et al. 2011 \cite{lozupone2011unifrac} addressed the se
 
 \begin{figure}[h]
 \includegraphics[scale=0.35]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/sample_migration.eps}
-\caption{{\bf Sample migration in different rarefactions, plotted on principal components, measured with unweighted UniFrac.}
+\caption[Sample migration in different rarefactions, plotted on principal components, measured with unweighted UniFrac.]{{\bf Sample migration in different rarefactions, plotted on principal components, measured with unweighted UniFrac.}
 The left plot is of the tongue data set while the right plot is the tongue dorsum vs. buccal mucosa data set. On the left panel red samples have moved from the left cluster to the right cluster between rarefactions. Blue samples have moved from the right cluster to the left. Samples are taken from the tongue dorsum body site from the Human Microbiome Project database. If the experiment were run once, one might mistakenly assume that there are two clusters of data, however, the inconsistent sample membership of the two groups between rarefactions proves the clustering irreproducible. The tongue dorsum and buccal mucosa data set is included for comparison, with the tongue samples colored black and the buccal mucosa samples colored red. Note that the variance explained in the tongue data set by the first and second component is merely 16.1\% and 9.8\% respectively, indicating that the data is rather spherical, even though the points on the plot appear to show two separated clusters (compare with 32.6\% and 16.2\% in the tongue dorsum vs. buccal mucosa data set). The variance explained in the first and second component in the 2011 UniFrac commentary \cite{lozupone2011unifrac} was even smaller, at 8.6\% and 5.6\%.}
 \label{fig2}
 \end{figure}
@@ -404,7 +404,7 @@ In both rarefactions on Fig.~\ref{fig2}, samples separated distinctly into two c
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/ellipses.eps}
-\caption{{\bf Maxiumum relative deviation of rarefactions versus median deviation for traditional and non-traditional microbiome dissimilarity metrics.} Sixty samples from the tongue dorsum were taken from the Human Microbiome Project \cite{turnbaugh2007human}, and rarefied 100 times. The maximum relative deviation was plotted against the median relative deviation of the rarefied data, and ellipses were drawn at the 95\% confidence interval, around the cloud of points for each metric. A higher maximum and median devation indicates lower reproducibility of results between rarefaction instances. Both the maximum relative deviation of rarefied data and the median relative deviation of rarefied data are greater in unweighted UniFrac than in weighted UniFrac, Bray Curtis distance, ratio UniFrac, and information UniFrac.}
+\caption[Maxiumum relative deviation of rarefactions versus median deviation for traditional and non-traditional microbiome dissimilarity metrics.]{{\bf Maxiumum relative deviation of rarefactions versus median deviation for traditional and non-traditional microbiome dissimilarity metrics.} Sixty samples from the tongue dorsum were taken from the Human Microbiome Project \cite{turnbaugh2007human}, and rarefied 100 times. The maximum relative deviation was plotted against the median relative deviation of the rarefied data, and ellipses were drawn at the 95\% confidence interval, around the cloud of points for each metric. A higher maximum and median devation indicates lower reproducibility of results between rarefaction instances. Both the maximum relative deviation of rarefied data and the median relative deviation of rarefied data are greater in unweighted UniFrac than in weighted UniFrac, Bray Curtis distance, ratio UniFrac, and information UniFrac.}
 \label{fig3}
 \end{figure}
 
@@ -421,14 +421,14 @@ One point to note is that rarefaction carries the assumption that microbiota wit
 
 \begin{figure}[h]
 \includegraphics[scale=0.5]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/tree.eps}
-\caption{{\bf Phylogenetic tree with long isolated branches.}
+\caption[Phylogenetic tree with long isolated branches.]{{\bf Phylogenetic tree with long isolated branches.}
 Variation in different rarefactions of data in unweighted UniFrac analysis is exacerbated by the presence of long isolated branches in the phylogenetic tree, such as the circled OTU in this example.}
 \label{fig4}
 \end{figure}
 
 \textsc{\begin{table}[!ht]
 % \begin{adjustwidth}{-2.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
-\caption{
+\caption[Original abundance of taxa and rarefied abundance of taxa.]{
 {\bf Original abundance of taxa and rarefied abundance of taxa.} This data was simulated to demonstrate how rarefaction can change the distances reported by the unweighted UniFrac metric. The OTU in bold has been rarified to a zero count in sample A for one instance and a non zero count in the other instance. In Rarefaction 1, the unweighetd UniFrac distance (unshared over total branches) is 0.4175, while in Rarefaction 2 the distance is 1.12.}
 \begin{tabular}{|l|l|l|l|l|l|l|l|}
 \hline
@@ -462,7 +462,7 @@ The difference in information content between taxa with low proportional abundan
 
 \begin{figure}[h]
 \includegraphics[scale=0.6]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/weightings.eps}
-\caption{{\bf UniFrac weights. }
+\caption[UniFrac weights.]{{\bf UniFrac weights. }
 Each UniFrac weighting is plotted with the corresponding proportional abundance. The black line is unweighted UniFrac, the red line is weighted UniFrac,and  the blue line is information UniFrac. From 0 to 0.2 on the x-axis information UniFrac has a higher slope, and therefore more discovery power with smaller changes in abundance. As the x-axis approaches 1, changes in abundance add little discovery power to information Unifrac.}
 \label{fig5}
 \end{figure}
@@ -475,7 +475,7 @@ For example, Fig.~\ref{fig5} shows the weighting of a taxon in unweighted, weigh
 
 \begin{figure}[h]
 \includegraphics[scale=0.8]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/tongue_cheek.eps}
-\caption{{\bf Analysis of tongue and buccal mucosa data using different UniFrac weightings. }
+\caption[Analysis of tongue and buccal mucosa data using different UniFrac weightings.]{{\bf Analysis of tongue and buccal mucosa data using different UniFrac weightings. }
 A principal component analysis of a 16S rRNA gene tag experiment done on samples from the tongue and buccal mucosa, selected from the Human Microbiome Project \cite{turnbaugh2007human}. All weightings and the Bray-Curtis dissimilarity show separation between the samples by body site. Note that the variance explained by the first and second principal component axis is higher than in the tongue-tongue data set from Figure 2, which had 16.1\% and 9.8\% variance explained, respectively.}
 \label{fig6}
 \end{figure}
@@ -490,7 +490,7 @@ Fig.~\ref{fig6} shows a principal component analysis plot with four different me
 
 \begin{figure}[h]
 \includegraphics[scale=0.8]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/breastmilk.eps}
-\caption{{\bf Analysis of simulated monocultures using different UniFrac weightings. }
+\caption[Analysis of simulated monocultures using different UniFrac weightings.]{{\bf Analysis of simulated monocultures using different UniFrac weightings. }
 A principal component analysis of a simulated 16S rRNA gene tag experiment based on the breast milk data. Red samples are dominated at 07\% by \textit{Pasteurella}, black samples are dominated by \textit{Staphylococcus}, and cyan samples are dominated by \textit{Pseudomonas}. Note that while information Unifrac appears to separate the samples reasonably well visually, the amount of variance explained by the first two components is much lower than even weighted UniFrac.}
 \label{fig7}
 \end{figure}
@@ -505,7 +505,7 @@ The reason the infected sample in the breast milk study is so distinct from the 
 
 \begin{figure}[h]
 \includegraphics[scale=0.8]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/monoculture.eps}
-\caption{{\bf Analysis of simulated monocultures using different UniFrac weightings. }
+\caption[Analysis of simulated monocultures using different UniFrac weightings.]{{\bf Analysis of simulated monocultures using different UniFrac weightings. }
 A principal component analysis of a simulated 16S rRNA gene tag experiment based on the breast milk data. Red samples are dominated at 97\% by \textit{Pasteurella}, black samples are dominated by \textit{Pseudomonas}, and cyan samples are dominated by \textit{Staphylococcus}. Note that while information Unifrac appears to separate the samples reasonably well visually, the amount of variance explained by the first two components is much lower than even weighted UniFrac.}
 \label{fig8}
 \end{figure}
