@@ -1,7 +1,7 @@
 % Template for PLoS
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL /Users/dphamnyghonca/Desktop/unifrac_paper-submission/expanding_the_unifrac_toolbox.tex              Thu Mar 10 10:32:28 2016
-%DIF ADD /Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/expanding_the_unifrac_toolbox.tex   Sat Apr 16 13:26:43 2016
+%DIF DEL /Users/dphamnyghonca/Downloads/unifrac_paper-submission/expanding_the_unifrac_toolbox.tex   Thu Mar 10 10:32:28 2016
+%DIF ADD expanding_the_unifrac_toolbox.tex                                                           Tue Apr 19 23:42:39 2016
 % Version 3.1 February 2015
 %
 % To compile to pdf, run:
@@ -365,6 +365,9 @@ Unweighted UniFrac is calculated based on the presence or absence of counts for 
 \DIFaddbegin \DIFadd{The sum of the branch lengths that belong to one sample but not the other is divided by the sum of the branch lengths that belong to one or both samples.
 }
 
+\DIFadd{Note that the implementation of unweighted UniFrac in QIIME (see Fig.~\ref{fig2}) and also GUniFrac (see Supporting figures ~\ref{gunifrac_1}, ~\ref{gunifrac_2}, and ~\ref{gunifrac_3}) includes a tree pruning procedure, where the tree is pruned to only include OTUs that are present in each pairwise sample comparison. Except for in figure ~\ref{fig2} and supporting figures ~\ref{gunifrac_1}, ~\ref{gunifrac_2}, and ~\ref{gunifrac_3}, the scripts used in this paper do not prune the tree, in order to be consistent with weighted UniFrac. In weighted UniFrac, pruning the tree makes the measurement a dissimilarity rather than a distance.
+}
+
 \DIFaddend \paragraph{Weighted UniFrac}\mbox{}\\
 Weighted UniFrac \cite{lozupone2007quantitative} also incorporates each branch length of the phylogenetic tree, and weights them according to proportional abundance of the two samples. The formula for weighed UniFrac is as follows, where $A$ and $B$ are the two samples, $b$ is the set of branch lengths, and $\frac{A_{i}}{A_{T}}$ and $\frac{B_{i}}{B_{T}}$ are the proportional abundances associated with branch length $b_{i}$:
 
@@ -505,7 +508,7 @@ In both rarefactions on Fig.~\ref{fig2}, samples separated distinctly into two c
 \label{fig3}
 \end{figure}
 
-For the ellipse plot in Fig.~\ref{fig3}, 60 tongue dorsum subsamples were randomly drawn without replacement\DIFdelbegin \DIFdel{and the gene compositions per sample were also filtered to a minimum of 100. }\DIFdelend \DIFaddbegin \DIFadd{. Rare OTUs with less than 100 total counts across all samples were removed. }\DIFaddend A hundred separate rarefactions were conducted on the data to a minimum sampling depth of 378. For each individual rarefied OTU table, a distance matrix was computed using \DIFdelbegin \DIFdel{the }\DIFdelend \DIFaddbegin \DIFadd{one of }\DIFaddend unweighted Unifrac, weighted UniFrac, Bray-Curtis Dissimilarity, information UniFrac, \DIFdelbegin \DIFdel{and centered }\DIFdelend \DIFaddbegin \DIFadd{or }\DIFaddend ratio UniFrac as \DIFdelbegin \DIFdel{a }\DIFdelend \DIFaddbegin \DIFadd{the }\DIFaddend weighting method. By generating 100 separate datasets for each metric, it is possible to assess the \DIFdelbegin \DIFdel{magnitude of difference each metric has }\DIFdelend \DIFaddbegin \DIFadd{effect of rarefation instance on each metric }\DIFaddend by analyzing what is essentially the same data. In other words, what does the effect of random sampling (rarefaction) have on the output of each metric? Each distance matrix generated per metric was adjusted with a Procrustes adjustment to overlay the subsequent rarefactions onto the first.
+For the ellipse plot in Fig.~\ref{fig3}, 60 tongue dorsum subsamples were randomly drawn without replacement\DIFdelbegin \DIFdel{and the gene compositions per sample were also filtered to a minimum of 100. }\DIFdelend \DIFaddbegin \DIFadd{. Rare OTUs with less than 100 total counts across all samples were removed. }\DIFaddend A hundred separate rarefactions were conducted on the data to a minimum sampling depth of \DIFdelbegin \DIFdel{378. }\DIFdelend \DIFaddbegin \DIFadd{659. }\DIFaddend For each individual rarefied OTU table, a distance matrix was computed using \DIFdelbegin \DIFdel{the }\DIFdelend \DIFaddbegin \DIFadd{one of }\DIFaddend unweighted Unifrac, weighted UniFrac, Bray-Curtis Dissimilarity, information UniFrac, \DIFdelbegin \DIFdel{and centered }\DIFdelend \DIFaddbegin \DIFadd{or }\DIFaddend ratio UniFrac as \DIFdelbegin \DIFdel{a }\DIFdelend \DIFaddbegin \DIFadd{the }\DIFaddend weighting method. By generating 100 separate datasets for each metric, it is possible to assess the \DIFdelbegin \DIFdel{magnitude of difference each metric has }\DIFdelend \DIFaddbegin \DIFadd{effect of rarefation instance on each metric }\DIFaddend by analyzing what is essentially the same data. In other words, what does the effect of random sampling (rarefaction) have on the output of each metric? Each distance matrix generated per metric was adjusted with a Procrustes adjustment to overlay the subsequent rarefactions onto the first.
 
 \DIFdelbegin \DIFdel{Thus, given the wide use of unweighted UniFrac in the literature with small principal component 1 and 2 effects, we suggest caution in their interpretation. For example, see the use of unweighted UniFrac in these papers about the human microbiome published in Cell\mbox{%DIFAUXCMD
 \cite{hsiao2013microbiota} }%DIFAUXCMD
@@ -552,7 +555,7 @@ Variation in different rarefactions of data in unweighted UniFrac analysis is ex
 }
 %DIFAUXCMD
 \DIFdelendFL \DIFaddbeginFL \caption[Original abundance of taxa and rarefied abundance of taxa.]{
-{\bf \DIFaddFL{Original abundance of taxa and rarefied abundance of taxa.}} \DIFaddFL{This data was simulated to demonstrate how rarefaction can change the distances reported by the unweighted UniFrac metric. The OTU in bold has been rarified to a zero count in sample A for one instance and a non zero count in the other instance. In Rarefaction 1, the unweighetd UniFrac distance (unshared over total branches) is 0.4175, while in Rarefaction 2 the distance is 1.12.}}
+{\bf \DIFaddFL{Original abundance of taxa and rarefied abundance of taxa.}} \DIFaddFL{This data was simulated to demonstrate how rarefaction can change the distances reported by the unweighted UniFrac metric. Originally, sample A contained 1075 counts and sample B contained 221 counts in total. Both samples were rarefied to 221 counts, twice. The OTU in bold has been rarified to a zero count in sample A for one instance and a non zero count in the other instance. In Rarefaction 1, the unweighetd UniFrac distance (unshared over total branches) is 0.4175, while in Rarefaction 2 the distance is 1.12.}}
 \DIFaddendFL \begin{tabular}{|l|l|l|l|l|l|l|l|}
 \hline
 \bf{OTU.ID} & \bf{A} & \bf{B} & \bf{\shortstack{A\\R1}} & \bf{\shortstack{B\\R1}} & \bf{\shortstack{A\\R2}} & \bf{\shortstack{B\\R2}}\\ \hline
@@ -687,6 +690,49 @@ We found weighted UniFrac, information UniFrac, \DIFdelbegin \DIFdel{centered }\
 }
 
 \DIFaddend In summary, with the addition of information UniFrac and \DIFdelbegin \DIFdel{centered }\DIFdelend ratio UniFrac, biologists have more tools at their disposal to prevent spurious interpretations, detect outliers, and ultimately understand their data better.
+\DIFaddbegin 
+
+\section*{\DIFadd{Supporting Information}}
+
+%DIF >  Include only the SI item label in the paragraph heading. Use the \nameref{label} command to cite SI items in the text.
+\begin{figure}[h]
+\paragraph*{\DIFaddFL{S1 Fig.}}\DIFaddFL{\mbox{}}\\
+\includegraphics[scale=0.3]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/gunifrac_0.eps}
+\includegraphics[scale=0.3]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/gunifrac_0_25.eps}
+\caption[Principal Coordinate Analysis derived from GUniFrac distance matrices.]{{\bf \DIFaddFL{Principal Coordinate Analysis derived from GUniFrac distance matrices. }} \DIFaddFL{GUniFrac was run with an alpha of 0 and 0.25. Note that GUniFrac, like QIIME, prunes the tree with every pairwise comparison. That is, the phylogenetic tree used for the distance calculation for each pair of samples can be different. The resulting measurements are a dissimilarity, not a distance. Additionally, QIIME gives slightly different values from GUniFrac, but the source of this (likely an additional normalization) is not known.}}
+\label{gunifrac_1}
+\end{figure}
+
+\begin{figure}[h]
+\paragraph*{\DIFaddFL{S2 Fig.}}\DIFaddFL{\mbox{}}\\
+\includegraphics[scale=0.3]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/gunifrac_0_5.eps}
+\includegraphics[scale=0.3]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/gunifrac_0_75.eps}
+\caption[Principal Coordinate Analysis derived from GUniFrac distance matrices.]{{\bf \DIFaddFL{Principal Coordinate Analysis derived from GUniFrac distance matrices. }} \DIFaddFL{GUniFrac was run with an alpha of 0.5 and 0.75. Note that GUniFrac, like QIIME, prunes the tree with every pairwise comparison. That is, the phylogenetic tree used for the distance calculation for each pair of samples can be different. The resulting measurements are a dissimilarity, not a distance. Additionally, QIIME gives slightly different values from GUniFrac, but the source of this (likely an additional normalization) is not known.}}
+\label{gunifrac_2}
+\end{figure}
+
+\begin{figure}[h]
+\paragraph*{\DIFaddFL{S3 Fig.}}\DIFaddFL{\mbox{}}\\
+\includegraphics[scale=0.3]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/gunifrac_1.eps}
+\includegraphics[scale=0.3]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/gunifrac_UW.eps}
+\caption[Principal Coordinate Analysis derived from GUniFrac distance matrices.]{{\bf \DIFaddFL{Principal Coordinate Analysis derived from GUniFrac distance matrices. }} \DIFaddFL{GUniFrac was run with an alpha of 1 (equivalent to weighted UniFrac), plus unweighted UniFrac for comparison. Note that GUniFrac, like QIIME, prunes the tree with every pairwise comparison. That is, the phylogenetic tree used for the distance calculation for each pair of samples can be different. The resulting measurements are a dissimilarity, not a distance. Additionally, QIIME gives slightly different values from GUniFrac, but the source of this (likely an additional normalization) is not known.}}
+\label{gunifrac_3}
+\end{figure}
+
+\begin{figure}[h]
+\paragraph*{\DIFaddFL{S4 Fig.}}\DIFaddFL{\mbox{}}\\
+\includegraphics[scale=0.7]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/tongue_tongue_sample_migration_no_pruning.eps}
+\caption[Principal coordinate analysis derived from tongue dorsum samples using unweighted UniFrac distance matrices with no tree pruning.]{{\bf \DIFaddFL{Principal coordinate analysis derived from tongue dorsum samples using unweighted UniFrac distance matrices with no tree pruning.}}}
+\label{S2_Fig}
+\end{figure}
+
+\begin{figure}[h]
+\paragraph*{\DIFaddFL{S5 Fig.}}\DIFaddFL{\mbox{}}\\
+\includegraphics[scale=0.7]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/tongue_cheek_sample_migration_no_pruning.eps}
+\caption[Principal coordinate analysis derived from tongue dorsum and buccal mucosa samples using unweighted UniFrac distance matrices with no tree pruning.]{{\bf \DIFaddFL{Principal coordinate analysis derived from tongue dorsum and buccal mucosa samples using unweighted UniFrac distance matrices with no tree pruning.}}}
+\label{S3_Fig}
+\end{figure}
+\DIFaddend 
 
 \section*{Acknowledgments}
 Thanks to Camilla Urbaniak for providing the data from her breast milk study \cite{urbaniak2016human}.
