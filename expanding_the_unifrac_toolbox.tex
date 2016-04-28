@@ -299,13 +299,13 @@ Unweighted_{AB} = \frac{\sum_{}{} b_{A} \triangle b_{B}}{\sum_{}{} b_{A} \cup b_
 
 The sum of the branch lengths that belong to one sample but not the other is divided by the sum of the branch lengths that belong to one or both samples.
 
-Note that the implementation of unweighted UniFrac in QIIME (see Fig.~\ref{fig2}) and also GUniFrac (see Supporting figures ~\ref{gunifrac_1}, ~\ref{gunifrac_2}, and ~\ref{gunifrac_3}) includes a tree pruning procedure, where the tree is pruned to only include OTUs that are present in each pairwise sample comparison. Except for in figure ~\ref{fig2} and supporting figures ~\ref{gunifrac_1}, ~\ref{gunifrac_2}, and ~\ref{gunifrac_3}, the scripts used in this paper do not prune the tree, in order to be consistent with weighted UniFrac. In weighted UniFrac, pruning the tree makes the measurement a dissimilarity rather than a distance.
+Note that the implementation of unweighted UniFrac in QIIME (see Fig.~\ref{fig2}) and also GUniFrac (see Supporting figures ~\ref{gunifrac_1}, ~\ref{gunifrac_2}, and ~\ref{gunifrac_3}) includes a tree pruning procedure, where the tree is pruned to only include OTUs that are present in each pairwise sample comparison. Except for in figure ~\ref{fig2} and supporting figures ~\ref{gunifrac_1}, ~\ref{gunifrac_2}, and ~\ref{gunifrac_3}, the scripts used in this paper do not prune the tree, in order to be consistent with weighted UniFrac. In weighted UniFrac, pruning the tree makes the measurement a dissimilarity rather than a distance (Supporting Information ~\ref{S4_Fig}).
 
 \paragraph{Weighted UniFrac}\mbox{}\\
 Weighted UniFrac \cite{lozupone2007quantitative} also incorporates each branch length of the phylogenetic tree, and weights them according to proportional abundance of the two samples. The formula for weighed UniFrac is as follows, where $A$ and $B$ are the two samples, $b$ is the set of branch lengths, and $\frac{A_{i}}{A_{T}}$ and $\frac{B_{i}}{B_{T}}$ are the proportional abundances associated with branch length $b_{i}$:
 
 \begin{align*}
-Weighted_{AB} = \sum_{i}^{n} b_{i} \times \left| \frac{A_{i}}{A_{T}} - \frac{B_{i}}{B_{T}} \right|
+Weighted_{AB} = \frac{\sum_{i}^{n} b_{i} \times \left| \frac{A_{i}}{A_{T}} - \frac{B_{i}}{B_{T}} \right|}{\sum_{i}^{n} b_{i}}
 \end{align*}
 
 \paragraph{Information UniFrac}\mbox{}\\
@@ -315,12 +315,12 @@ Information UniFrac is calculated by weighing each branch length by the differen
 I = - p  \times log_{2}(p)
 \end{equation}
 
-If a sample is composed of 50\% taxa A and 50\% taxa B, then the proportional abundances have maximum uncertainty about what taxa is likely to be seen in a given sequence read. If a sample is 80\% taxa A and 20\% taxa B, then there is less uncertainty, because a given sequence read is more likely to be taxa A. When the amount of uncertainty that a taxa has in one sample corresponds with the amount of uncertainty the same taxa has in a different sample, the abundance of that taxa is mutually informative between samples. Weighting UniFrac by uncertainty combines the the concept of uncertainty with phylogenetic relationships to identify taxa that are differentially informative between groups.
+If a sample is composed of 50\% taxa A and 50\% taxa B, then the proportional abundances have maximum uncertainty about what taxa is likely to be seen in a given sequence read. If a sample is 80\% taxa A and 20\% taxa B, then there is less uncertainty about both taxa, because a given sequence read is more likely to be taxa A and less likely to be taxa B. When the amount of uncertainty that a taxa has in one sample corresponds with the amount of uncertainty the same taxa has in a different sample, the abundance of that taxa is mutually informative between samples. Weighting UniFrac by uncertainty combines the the concept of uncertainty with phylogenetic relationships to identify taxa that are differentially informative between groups.
 
 The formula for Information UniFrac is as follows:
 
 \begin{align*}
-Information_{AB} = \sum_{i}^{n} b_{i} \times \left| \frac{A_{i}}{A_{T}}log\left(\frac{A_{i}}{A_{T}}\right) - \frac{B_{i}}{B_{T}}log\left(\frac{B_{i}}{B_{T}}\right) \right|
+Information_{AB} = \frac{\sum_{i}^{n} b_{i} \times \left| \frac{A_{i}}{A_{T}}log\left(\frac{A_{i}}{A_{T}}\right) - \frac{B_{i}}{B_{T}}log\left(\frac{B_{i}}{B_{T}}\right) \right|}{\sum_{i}^{n} b_{i}}
 \end{align*}
 
 Information UniFrac approaches a minimum of zero (Fig.~\ref{fig5}) when a sample is composed of a monoculture. It also related to the Aitchison distance in compositional data analysis \cite{egozcue2011evidence}.
@@ -329,7 +329,7 @@ Information UniFrac approaches a minimum of zero (Fig.~\ref{fig5}) when a sample
 In complex microbiome communities, there may be a large number of bacterial taxa with few counts, such that the data is sparse. Taking the geometric mean of the proportional abundances of taxa in a microbiome sample represents an unbiased baseline of the average abundance of features with geometric growth characteristics - such as bacteria which divide by fission \cite{aitchison1982statistical}. Experiments generally do not have power to detect differences at abundances below the mean \cite{fernandes2013anova}. Centering the proportional abundances around the geometric mean thus allows one to examine the data in this context, muting differences that are close to the baseline abundance and accentuating OTUs that are much more abundant than the mean. The formula for ratio UniFrac is as follows, where $gm$ is the geometric mean:
 
 \begin{align*}
-Ratio_{AB} = \sum_{i}^{n} b_{i} \times \left| \frac{\frac{A_{i}}{A_{T}}}{gm(A_{i})} - \frac{\frac{B_{i}}{B_{T}}}{{gm(B_{i})}} \right|
+Ratio_{AB} = \frac{\sum_{i}^{n} b_{i} \times \left| \frac{\frac{A_{i}}{A_{T}}}{gm(A_{i})} - \frac{\frac{B_{i}}{B_{T}}}{{gm(B_{i})}} \right|}{\sum_{i}^{n} b_{i}}
 \end{align*}
 
 Note that the geometric mean is calculated by combining all children in the subtree of $b_{i}$ into $\frac{A_{i}}{A_{T}}$ for sample $A$ or $\frac{B_{i}}{B_{T}}$ for sample $B$, and including the rest of the single taxa proportional abundances separately. The one combined proportional abundance and the remaining single taxa proportional abundances are input into the geometric mean formula, as set $a$:
@@ -342,7 +342,7 @@ One challenge when it comes to the analysis of read count data is that the data 
 
 The use of ratio weighting for UniFrac produces measurements that violate the metric triangle inequality, such that Euclidean statistics are technically invalid. Thus this metric, like the Bray-Curtis metric, is a dissimilarity, not a distance.
 
-For this paper, we calculate UniFrac metrics using a custom R script, which includes unweighted UniFrac, weighted UniFrac, information UniFrac, and ratio UniFrac: \url{https://zenodo.org/badge/latestdoi/21613/ruthgrace/ruth_unifrac_workshop}
+For this paper, we calculate UniFrac metrics using a custom R script, which includes unweighted UniFrac, weighted UniFrac, information UniFrac, and ratio UniFrac \cite{ruth_unifrac_workshop}:
 
 \paragraph{Bray-Curtis dissimilarity metric}\mbox{}\\
 The Bray Curtis dissimilarity metric \cite{beals1984bray} quantifies how dissimilar two sites are based on counts. A Bray-Curtis index of 0 means that two samples are identical, while a Bray-Curtis index of 1 means samples do not share any species. It is computed as a proportion through the formula:
@@ -355,7 +355,7 @@ C_{ij} &= 1 - \frac{2C_{ij}}{S_{i} + S_{j}} \\
 \end{align*}
 
 \subsection{Data preparation}
-The data used comes in the form of a table of counts per operational taxonomic unit per sample, plus a phylogenetic tree. All of our data are derived from 16S rRNA gene tag sequencing experiments, and the data and scripts can be accessed at \url{https://zenodo.org/badge/latestdoi/21613/ruthgrace/R_Scripts}.
+The data used comes in the form of a table of counts per operational taxonomic unit per sample, plus a phylogenetic tree. All of our data are derived from 16S rRNA gene tag sequencing experiments, and the data and scripts can be accessed at \url{https://github.com/ruthgrace/r_scripts} \cite{r_scripts}.
 
 \paragraph{Tongue dorsum data set}\mbox{}\\
 The tongue dorsum data set is a collection of 60 microbiome samples taken from the tongues of healthy participants. There were 0.3 million reads across 554 OTUs, and a minimum and maximum of 659 and 17176 reads per sample.
@@ -383,7 +383,7 @@ Read counts from the HMP data set were rarefied to the smallest total read count
 \paragraph{Breast milk data set}\mbox{}\\
 The breast milk data set is a collection of 58 microbiome samples taken from lactating Caucasian Canadian women. The breast milk data set used here has also been published in a recent study \cite{urbaniak2016human}. There were a total of 5.3 million reads across 115 OTUs, and a minimum and maximum of 3072 and 2.8 million reads per sample. Note that the 2.8 million reads came from a sample that was taken from a patient with an infection, and the next largest number of reads per sample was 282485 (ten times less).
 
-The count table was analyzed using our custom UniFrac script, which can be accessed at \url{https://github.com/ruthgrace/ruth_unifrac_workshop}. Data was rarefied to the sample with the smallest number of read counts (3072) before the unweighted UniFrac distance matrix was calculated. Non-rarefied data was used for weighted, information, and ratio UniFrac. Data was plotted using a principal coordinates or component plot as appropriate.
+The count table was analyzed using our custom UniFrac script, which can be accessed at \url{https://github.com/ruthgrace/ruth_unifrac_workshop} \cite{ruth_unifrac_workshop}. Data was rarefied to the sample with the smallest number of read counts (3072) before the unweighted UniFrac distance matrix was calculated. Non-rarefied data was used for weighted, information, and ratio UniFrac. Data was plotted using a principal coordinates or component plot as appropriate.
 
 \paragraph{Monoculture data set}\mbox{}\\
 The monoculture data set is simulated based on the infected sample from the breast milk data set. Each simulated sample has exactly the same counts per taxa as the infected sample, except that the taxa are shuffled. After taxa shuffling, the data was manipulated into two groups. In one set of 20 samples the taxa with the highest count was swapped with \textit{Pasteurella}, in another set of 20 the taxa with the highest count was swapped with \textit{Staphylococcus}, and in the last set of 20 the taxa with the highest count was swapped with \textit{Pseudomonas}. These three taxa were picked because they were the most highly abundant in the original breast milk data set. This process produced three sets of monocultures, dominated by the three different taxa.
@@ -408,7 +408,7 @@ In both rarefactions on Fig.~\ref{fig2}, samples separated distinctly into two c
 
 \begin{figure}[h]
 \includegraphics[scale=0.4]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/ellipses.eps}
-\caption[Maxiumum relative deviation of rarefactions versus median deviation for traditional and non-traditional microbiome dissimilarity metrics.]{{\bf Maxiumum relative deviation of rarefactions versus median deviation for traditional and non-traditional microbiome dissimilarity metrics.} Sixty samples from the tongue dorsum were taken from the Human Microbiome Project \cite{turnbaugh2007human}, and rarefied 100 times. The maximum relative deviation was plotted against the median relative deviation of the rarefied data, and ellipses were drawn at the 95\% confidence interval, around the cloud of points for each metric. A higher maximum and median devation indicates lower reproducibility of results between rarefaction instances. Both the maximum relative deviation of rarefied data and the median relative deviation of rarefied data are greater in unweighted UniFrac than in weighted UniFrac, Bray Curtis distance, ratio UniFrac, and information UniFrac.}
+\caption[Maxiumum relative deviation of rarefactions versus median deviation for traditional and non-traditional microbiome dissimilarity metrics.]{{\bf Maxiumum relative deviation of rarefactions versus median deviation for traditional and non-traditional microbiome dissimilarity metrics.} Sixty samples from the tongue dorsum were taken from the Human Microbiome Project \cite{turnbaugh2007human}, and rarefied 100 times. The maximum relative deviation was plotted against the median relative deviation of the rarefied data, and ellipses were drawn at the 95\% confidence interval, around the cloud of points for each metric. A higher maximum and median devation indicates lower reproducibility of results between rarefaction instances. Both the maximum relative deviation of rarefied data and the median relative deviation of rarefied data are greater in unweighted UniFrac than in weighted UniFrac, Bray Curtis dissimilarity, ratio UniFrac, and information UniFrac.}
 \label{fig3}
 \end{figure}
 
@@ -433,7 +433,7 @@ Variation in different rarefactions of data in unweighted UniFrac analysis is ex
 \textsc{\begin{table}[!ht]
 % \begin{adjustwidth}{-2.25in}{0in} % Comment out/remove adjustwidth environment if table fits in text column.
 \caption[Original abundance of taxa and rarefied abundance of taxa.]{
-{\bf Original abundance of taxa and rarefied abundance of taxa.} This data was simulated to demonstrate how rarefaction can change the distances reported by the unweighted UniFrac metric. Originally, sample A contained 1075 counts and sample B contained 221 counts in total. Both samples were rarefied to 221 counts, twice. The OTU in bold has been rarified to a zero count in sample A for one instance and a non zero count in the other instance. In Rarefaction 1, the unweighetd UniFrac distance (unshared over total branches) is 0.4175, while in Rarefaction 2 the distance is 1.12.}
+{\bf Original abundance of taxa and rarefied abundance of taxa.} This data was simulated to demonstrate how rarefaction can change the distances reported by the unweighted UniFrac metric. Originally, sample A contained 1075 counts and sample B contained 221 counts in total. Both samples were rarefied to 221 counts, twice. The OTU in bold has been rarified to a zero count in sample A for one instance and a non zero count in the other instance. In Rarefaction 1, the unweighted UniFrac distance (unshared over total branches) is 0.4175, while in Rarefaction 2 the distance is 1.12.}
 \begin{tabular}{|l|l|l|l|l|l|l|l|}
 \hline
 \bf{OTU.ID} & \bf{A} & \bf{B} & \bf{\shortstack{A\\R1}} & \bf{\shortstack{B\\R1}} & \bf{\shortstack{A\\R2}} & \bf{\shortstack{B\\R2}}\\ \hline
@@ -572,6 +572,13 @@ In summary, with the addition of information UniFrac and ratio UniFrac, biologis
 \includegraphics[scale=0.7]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/tongue_cheek_sample_migration_no_pruning.eps}
 \caption[Principal coordinate analysis derived from tongue dorsum and buccal mucosa samples using unweighted UniFrac distance matrices with no tree pruning.]{{\bf Principal coordinate analysis derived from tongue dorsum and buccal mucosa samples using unweighted UniFrac distance matrices with no tree pruning.}}
 \label{S3_Fig}
+\end{figure}
+
+\begin{figure}[h]
+\paragraph*{S6 Fig.}\mbox{}\\
+\includegraphics[scale=0.7]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/tree_pruning_example.eps}
+\caption[Weighted UniFrac is a dissimilarity with tree pruning.]{{\bf Weighted UniFrac is a dissimilarity with tree pruning.} Here, the weighted UniFrac measurements without tree pruning are: $W_{AB} = \frac{121}{252}$, $W_{BC} = \frac{111}{252}$, and $W_{AC} = \frac{11}{12}$. With tree pruning, the measurements are: $W_{AB} = \frac{121}{252}$, $W_{BC} = \frac{111}{252}$, and $W_{AC} = 1$, which fails the triangle inequality.}
+\label{S4_Fig}
 \end{figure}
 
 \section*{Acknowledgments}
