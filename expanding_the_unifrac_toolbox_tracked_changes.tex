@@ -1,7 +1,7 @@
 % Template for PLoS
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL /Users/dphamnyghonca/Downloads/unifrac_paper-submission/expanding_the_unifrac_toolbox.tex   Thu Mar 10 10:32:28 2016
-%DIF ADD expanding_the_unifrac_toolbox.tex                                                           Tue Apr 19 23:42:39 2016
+%DIF DEL /Users/dphamnyghonca/Desktop/expanding_the_unifrac_toolbox.tex   Thu Mar 10 10:32:28 2016
+%DIF ADD ./expanding_the_unifrac_toolbox.tex                              Thu Apr 28 13:39:02 2016
 % Version 3.1 February 2015
 %
 % To compile to pdf, run:
@@ -255,13 +255,13 @@ Gregory B Gloor\textsuperscript{1 *}
 \linenumbers
 
 \section*{Introduction}
-In 2005, Lozupone et al introduced the UniFrac distance metric, a measure to calculate the difference between microbiomes that incorporated phylogenetic distance \cite{lozupone2005unifrac}. The goal of UniFrac was to enable objective comparison between microbiome samples from different conditions. In 2007, Lozupone added a proportional weighting to the original unweighted method \cite{lozupone2007quantitative}. Since then, papers reporting these metrics have garnered over a thousand citations, and enabled research about everything from how kwashiorkor causes malnutrition \cite{smith2013gut} to how people can have similar microbiomes to their pet dogs \cite{song2013cohabiting}. Except for generalized UniFrac, used to make hybrid unweighted and weighted UniFrac comparisons \cite{chen2012associating}, few advances in the metric have occurred since 2007. In this paper we examine \DIFdelbegin \DIFdel{a data set where unweighted }\DIFdelend \DIFaddbegin \DIFadd{data sets where }\DIFaddend UniFrac gives misleading results, and \DIFaddbegin \DIFadd{present and }\DIFaddend discuss some alternative weightings for UniFrac.
+In 2005, Lozupone et al introduced the UniFrac distance metric, a measure to calculate the difference between \DIFdelbegin \DIFdel{microbiomes }\DIFdelend \DIFaddbegin \DIFadd{microbiome samples }\DIFaddend that incorporated phylogenetic distance \cite{lozupone2005unifrac}. The goal of \DIFdelbegin \DIFdel{UniFrac }\DIFdelend \DIFaddbegin \DIFadd{the UniFrac distance metric }\DIFaddend was to enable objective comparison between microbiome samples from different conditions. In 2007, Lozupone added a proportional weighting to the original unweighted method \cite{lozupone2007quantitative}. Since then, papers reporting these metrics have garnered over a thousand citations, and enabled research about everything from how kwashiorkor causes malnutrition \cite{smith2013gut} to how people can have similar microbiomes to their pet dogs \cite{song2013cohabiting}. Except for generalized UniFrac, used to make hybrid unweighted and weighted UniFrac comparisons \cite{chen2012associating}, few advances in the metric have occurred since 2007. In this paper we examine \DIFdelbegin \DIFdel{a data set where unweighted }\DIFdelend \DIFaddbegin \DIFadd{data sets where }\DIFaddend UniFrac gives misleading results, and \DIFaddbegin \DIFadd{present and }\DIFaddend discuss some alternative weightings for UniFrac.
 
 \DIFaddbegin \paragraph{\DIFadd{Operational Taxonomic Units}}\DIFadd{\mbox{}}\\
 \DIFadd{Unlike more distinct species, such as mammalian species, bacterial species are not well defined. Bacterial genomes are highly variable, and regions used to identify bacteria vary in a continuum rather than clusters of similar sequences.
 }
 
-\DIFadd{Historically bacteria that are have 97\% identity in a variable region are considered to be the same taxa \mbox{%DIFAUXCMD
+\DIFadd{Historically bacteria that are have 97\% identity in a 16S rRNA gene variable region are considered to be the same taxa \mbox{%DIFAUXCMD
 \cite{ciccarelli2006toward}}%DIFAUXCMD
 . The 97\% cutoff was arbitrarily chosen to best map sequence data to bacterial classifications. This threshold is thought to maximizes the grouping of bacteria classified as the same species while minimizing the grouping of bacteria classified as different species \mbox{%DIFAUXCMD
 \cite{caporaso2011global}}%DIFAUXCMD
@@ -285,13 +285,15 @@ In 2005, Lozupone et al introduced the UniFrac distance metric, a measure to cal
 }
 
 \subsection{\DIFadd{Data}}
-\DIFadd{UniFrac requires two pieces of information: phylogenetic tree and a table of counts per inferred taxa per sample. These are derived from a gene tag sequencing experiment, such as the commonly used 16S rRNA gene \mbox{%DIFAUXCMD
+\DIFadd{UniFrac requires two pieces of information: a phylogenetic tree and a table of counts per inferred taxa per sample. These are derived from a gene tag sequencing experiment, such as the commonly used 16S rRNA gene \mbox{%DIFAUXCMD
 \cite{tringe2008renaissance}}%DIFAUXCMD
 . The sequenced gene contains a variable region, allowing the sequences to be grouped into OTUs as described in the previous section. A count table can then be generated with the number of reads per OTU per sample. The center sequence of each OTU group can be put into a multiple sequence alignment, from which a phylogenetic tree can be inferred.
 }
 
 \DIFadd{The phylogenetic tree is created through a multiple sequence alignment with the representative OTU sequences, using software such as MUSCLE \mbox{%DIFAUXCMD
-\cite{edgar2004muscle}}%DIFAUXCMD
+\cite{edgar2004muscle} }%DIFAUXCMD
+and FastTree \mbox{%DIFAUXCMD
+\cite{price2010fasttree}}%DIFAUXCMD
 , or using a guide tree, such as through Greengenes \mbox{%DIFAUXCMD
 \cite{desantis2006greengenes} }%DIFAUXCMD
 or the QIIME software \mbox{%DIFAUXCMD
@@ -300,19 +302,35 @@ or the QIIME software \mbox{%DIFAUXCMD
 }
 
 \subsection{\DIFadd{Compositional Data Analysis}}
-\DIFadd{Microbiome data is in the form of a list of counts per feature (OTUs in this case), with the features composing an aspect of the microbiome for each sample. This is compositional data. There are several core truths about microbiome data and its compositional nature that should be considered when making an analysis strategy.
+\DIFadd{Microbiome data is in the form of a list of counts per feature (OTUs in this case), with the features composing an aspect of the microbiome for each sample. This is compositional data because the total sum of reads for a sample is arbitrary, being determined by the capacity of the sequencing instrument \mbox{%DIFAUXCMD
+\cite{fernandes2013anova} }%DIFAUXCMD
+\mbox{%DIFAUXCMD
+\cite{fernandes2014unifying} }%DIFAUXCMD
+\mbox{%DIFAUXCMD
+\cite{gloor2010microbiome}}%DIFAUXCMD
+. There are several core truths about microbiome data and its compositional nature that should be considered when making an analysis strategy.
 }
 
-\DIFadd{First, the total number of reads per sample is influenced by sample collection, extraction, sequencing library preparation, and sequencing platform, and is irrelevant to the biological implications of the data. Additionally, the constraint of the count total causes the abundance of different taxa to appear to be negatively correlated with each other when analyzed by conventional statistics. When one taxa increases in abundance, the counts detected in other taxa decrease in abundance, even if the taxa are not decreasing in abundance biologically. For example, one study compared the microbiome of vaginal swab samples from women with bacterial vaginosis (BV), women without BV, and women with intermediate BV, using qPCR to quantify the taxa. }\textit{\DIFadd{Prevotella}} \DIFadd{was found to increase through non-BV to intermediate to BV, while }\textit{\DIFadd{Lactobacillus iners}} \DIFadd{stayed relatively the same. If the same samples were put through a gene tag sequencing experiment where the taxa could not be quantified and the total read counts were constrained, one might incorrectly conclude that the abundance }\textit{\DIFadd{Lactobacillus iners}} \DIFadd{was decreasing while }\textit{\DIFadd{Prevotella}} \DIFadd{was increasing.
+\DIFadd{First, the total number of reads per sample is influenced by sample collection, extraction, sequencing library preparation, and sequencing platform, and is irrelevant to the biological implications of the data. Additionally, the constraint of the count total causes the abundance of different taxa to appear to be negatively correlated with each other when analyzed by conventional statistics \mbox{%DIFAUXCMD
+\cite{lovell2015proportionality}}%DIFAUXCMD
+. When one taxa increases in abundance, the counts detected in other taxa decrease in abundance, even if the taxa are not decreasing in abundance biologically. For example, one study compared the microbiome of vaginal swab samples from women with bacterial vaginosis (BV), women without BV, and women with intermediate BV, using qPCR to quantify the taxa \mbox{%DIFAUXCMD
+\cite{zozaya2010quantitative}}%DIFAUXCMD
+. }\textit{\DIFadd{Prevotella}} \DIFadd{was found to increase through non-BV to intermediate to BV, while }\textit{\DIFadd{Lactobacillus iners}} \DIFadd{stayed relatively the same \mbox{%DIFAUXCMD
+\cite{zozaya2010quantitative}}%DIFAUXCMD
+. If the same samples were put through a gene tag sequencing experiment where the taxa could not be quantified and the total read counts were constrained, one might incorrectly conclude that the abundance of }\textit{\DIFadd{Lactobacillus iners}} \DIFadd{was decreasing while }\textit{\DIFadd{Prevotella}} \DIFadd{was increasing.
 }
 
 \DIFadd{To prevent incorrect conclusions, data should be analyzed in a compositional way. In Euclidean space, data points can increase or decrease freely. Compositional data is under a sum constraint, and exist in a non-Euclidean space known as the Aitchison simplex \mbox{%DIFAUXCMD
 \cite{aitchison1982statistical}}%DIFAUXCMD
-. A data transformation can be performed to put the data into Euclidean space, so that it can be analyzed with standard statistical methods that depend on Cartesian coordinates and linear relationships. These transformations involve examining the ratios of different OTU abundances to each other, so that the total number of reads do not unduly affect the result. In the example with bacterial vaginosis, using ratios of taxa to each other would elucidate the nature of the biological change in the data.
+. A data transformation can be performed to put the data into Euclidean space, so that it can be analyzed with standard statistical methods that depend on Cartesian coordinates and linear relationships. These transformations involve examining the ratios of different OTU abundances to each other, so that the total number of reads do not unduly affect the result \mbox{%DIFAUXCMD
+\cite{gloor2016s} }%DIFAUXCMD
+\mbox{%DIFAUXCMD
+\cite{gloor2016compositional}}%DIFAUXCMD
+. In the example with bacterial vaginosis, using ratios of taxa to each other would elucidate the nature of the biological change in the data.
 }
 
 \DIFaddend \subsection{Unweighted UniFrac}
-Unweighted UniFrac \cite{lozupone2005unifrac} uses an inferred evolutionary distance to measure similarity between samples. It requires a reference phylogenetic tree containing all the taxa present in the samples to be examined\DIFaddbegin \DIFadd{, plus information about which taxa were detected in each sample}\DIFaddend . The calculation is performed by dividing the branch lengths \DIFaddbegin \DIFadd{that are not }\DIFaddend shared between the two samples by the branch lengths covered by either sample. \DIFaddbegin \DIFadd{Figure ~\ref{fig1} shows example calcualtions for UniFrac based on the tree overlap. }\DIFaddend A distance of 0 means that the samples are identical, and a distance of 1 means that the two samples share no taxa in common.
+Unweighted UniFrac \cite{lozupone2005unifrac} uses an inferred evolutionary distance to measure similarity between samples. It requires a reference phylogenetic tree containing all the taxa present in the samples to be examined\DIFaddbegin \DIFadd{, plus information about which taxa were detected in each sample}\DIFaddend . The calculation is performed by dividing the branch lengths \DIFaddbegin \DIFadd{that are not }\DIFaddend shared between the two samples by the branch lengths covered by either sample. \DIFaddbegin \DIFadd{Figure ~\ref{fig1} shows example calculations for UniFrac based on the tree overlap. }\DIFaddend A distance of 0 means that the samples are identical, and a distance of 1 means that the two samples share no taxa in common.
 
 \begin{figure}[h]
 \includegraphics[scale=0.5]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/unifrac_distance.eps}
@@ -324,7 +342,7 @@ When two samples do not share any branches of the phylogenetic tree, the unweigh
 
 \DIFaddbegin \DIFadd{As UniFrac is a binary test of absence, it is sensitive to sequencing depth, and assumes that the data has been normalized to a common sequencing depth \mbox{%DIFAUXCMD
 \cite{lozupone2011unifrac}}%DIFAUXCMD
-, and rarefaction prior to unweighted UniFrac has become a standard part of the microbiome analysis workflow, with built in rarefaction functions in QIIME \mbox{%DIFAUXCMD
+. Thus, rarefaction prior to unweighted UniFrac has become a standard part of the microbiome analysis workflow, with built in rarefaction functions in QIIME \mbox{%DIFAUXCMD
 \cite{caporaso2010qiime} }%DIFAUXCMD
 and mothur \mbox{%DIFAUXCMD
 \cite{schloss2009introducing}}%DIFAUXCMD
@@ -338,9 +356,12 @@ Weighted UniFrac \cite{lozupone2007quantitative} is an implementation of the Kan
 
 This technique reduces the problem of low abundance taxa being represented as a 0 or by a low count depending on sampling depth. In unweighted UniFrac, such taxa would flip from absent to present, and could skew the measurement: this would be especially problematic if the taxa are on a long branch. In weighted UniFrac, low abundance taxa have a much lower weight and so will have a lower impact on the total distance reported by the metric.
 
-UniFrac is constituted as either a \DIFdelbegin \DIFdel{presence/absence }\DIFdelend \DIFaddbegin \DIFadd{binary weighting }\DIFaddend (unweighted UniFrac) \cite{lozupone2005unifrac}, a linear proportion (weighted UniFrac) \cite{lozupone2007quantitative}, or some combination of the two (generalized UniFrac) \cite{chen2012associating}. However, \DIFaddbegin \DIFadd{it is a misconception that }\DIFaddend the data are \DIFdelbegin \DIFdel{not linear , }\DIFdelend \DIFaddbegin \DIFadd{linear }\DIFaddend because the sum of the total number of reads is constrained by the sequencing machinery \cite{friedman2012inferring} \cite{fernandes2013anova} \cite{fernandes2014unifying} \cite{lovell2015proportionality}. \DIFaddbegin \DIFadd{Microbiome communities can exhibit tremendous variation in their total bacterial count. For example, a stool sample may produce more highly concentrated DNA extract than a skin swab sample, resulting in different read count totals. Vaginal samples from patients with bacterial vaginosis compared to patients without can have total counts that differ one magnitude \mbox{%DIFAUXCMD
+UniFrac is constituted as either a \DIFdelbegin \DIFdel{presence/absence }\DIFdelend \DIFaddbegin \DIFadd{binary weighting }\DIFaddend (unweighted UniFrac) \cite{lozupone2005unifrac}, a linear proportion (weighted UniFrac) \cite{lozupone2007quantitative}, or some combination of the two (generalized UniFrac) \cite{chen2012associating}. However, \DIFaddbegin \DIFadd{it is a misconception that }\DIFaddend the data are \DIFdelbegin \DIFdel{not linear , }\DIFdelend \DIFaddbegin \DIFadd{linear }\DIFaddend because the sum of the total number of reads is constrained by the sequencing machinery \cite{friedman2012inferring} \cite{fernandes2013anova} \cite{fernandes2014unifying} \cite{lovell2015proportionality} \DIFdelbegin \DIFdel{. }\DIFdelend \DIFaddbegin \DIFadd{as described above.
+}
+
+\DIFadd{Microbiome communities can exhibit tremendous variation in their total bacterial count. For example, a stool sample may produce more highly concentrated DNA extract than a skin swab sample, resulting in a different number of input molecules but a similar read count total. Vaginal samples from patients with bacterial vaginosis compared to patients without can have DNA extract concentrations that differ one magnitude \mbox{%DIFAUXCMD
 \cite{zozaya2010quantitative}}%DIFAUXCMD
-. }\DIFaddend Alternative weightings and non-linear transformations of data need to be explored. Furthermore, unweighted UniFrac is known to be unreliable, but it is not generally known or understood how this can impact results.
+. }\DIFaddend Alternative weightings and non-linear transformations of data need to be explored. Furthermore, unweighted UniFrac is known to be unreliable, but it is not generally \DIFdelbegin \DIFdel{known or }\DIFdelend understood how this can impact results.
 
 % You may title this section "Methods" or "Models". 
 % "Models" is not a valid title for PLoS ONE authors. However, PLoS ONE
@@ -350,7 +371,7 @@ UniFrac is constituted as either a \DIFdelbegin \DIFdel{presence/absence }\DIFde
 \subsection{Analytical techniques}
 
 \paragraph{Rarefaction}\mbox{}\\
-Rarefaction normalizes the samples OTU counts to a standard sequencing depth \cite{simberloff1978use}. This resulting table can be thought of as a random point estimate of the dataset, as the output is a sub-sample \DIFaddbegin \DIFadd{without replacement }\DIFaddend of the original table. This standardization process is recommended by the authors of UniFrac \cite{de2011evaluation} in order to account for the sensitivity of UniFrac to sequencing depth.
+Rarefaction normalizes the samples OTU counts to a standard sequencing depth \DIFaddbegin \DIFadd{by sampling without replacement }\DIFaddend \cite{simberloff1978use}. This resulting table can be thought of as a random point estimate of the dataset, as the output is a sub-sample \DIFaddbegin \DIFadd{without replacement }\DIFaddend of the original table. This standardization process is recommended by the authors of UniFrac \cite{de2011evaluation} in order to account for the sensitivity of UniFrac to sequencing depth.
 
 Rarefactions can be performed using the \DIFdelbegin \DIFdel{Qiime }\DIFdelend \DIFaddbegin \DIFadd{QIIME }\DIFaddend software \cite{caporaso2010qiime} or using the vegan package in R \cite{oksanen2007vegan}.
 
@@ -365,30 +386,39 @@ Unweighted UniFrac is calculated based on the presence or absence of counts for 
 \DIFaddbegin \DIFadd{The sum of the branch lengths that belong to one sample but not the other is divided by the sum of the branch lengths that belong to one or both samples.
 }
 
-\DIFadd{Note that the implementation of unweighted UniFrac in QIIME (see Fig.~\ref{fig2}) and also GUniFrac (see Supporting figures ~\ref{gunifrac_1}, ~\ref{gunifrac_2}, and ~\ref{gunifrac_3}) includes a tree pruning procedure, where the tree is pruned to only include OTUs that are present in each pairwise sample comparison. Except for in figure ~\ref{fig2} and supporting figures ~\ref{gunifrac_1}, ~\ref{gunifrac_2}, and ~\ref{gunifrac_3}, the scripts used in this paper do not prune the tree, in order to be consistent with weighted UniFrac. In weighted UniFrac, pruning the tree makes the measurement a dissimilarity rather than a distance.
+\DIFadd{Note that the implementation of unweighted UniFrac in QIIME (see Fig.~\ref{fig2}) and also GUniFrac (see Supporting figures ~\ref{gunifrac_1}, ~\ref{gunifrac_2}, and ~\ref{gunifrac_3}) includes a tree pruning procedure, where the tree is pruned to only include OTUs that are present in each pairwise sample comparison. Except for in figure ~\ref{fig2} and supporting figures ~\ref{gunifrac_1}, ~\ref{gunifrac_2}, and ~\ref{gunifrac_3}, the scripts used in this paper do not prune the tree, in order to be consistent with weighted UniFrac. In weighted UniFrac, pruning the tree makes the measurement a dissimilarity rather than a distance (Supporting Information ~\ref{S4_Fig}).
 }
 
 \DIFaddend \paragraph{Weighted UniFrac}\mbox{}\\
 Weighted UniFrac \cite{lozupone2007quantitative} also incorporates each branch length of the phylogenetic tree, and weights them according to proportional abundance of the two samples. The formula for weighed UniFrac is as follows, where $A$ and $B$ are the two samples, $b$ is the set of branch lengths, and $\frac{A_{i}}{A_{T}}$ and $\frac{B_{i}}{B_{T}}$ are the proportional abundances associated with branch length $b_{i}$:
 
 \begin{align*}
-\DIFaddbegin \DIFadd{Weighted_{AB} = }\DIFaddend \sum_{i}^{n} b_{i} \times \left| \frac{A_{i}}{A_{T}} - \frac{B_{i}}{B_{T}} \right|
-\end{align*}
+\DIFdelbegin \DIFdel{\sum_{i}^{n} b_{i} \times }%DIFDELCMD < \left| %%%
+\DIFdel{\frac{A_{i}}{A_{T}} - \frac{B_{i}}{B_{T}} }%DIFDELCMD < \right|
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{Weighted_{AB} = \frac{\sum_{i}^{n} b_{i} \times \left| \frac{A_{i}}{A_{T}} - \frac{B_{i}}{B_{T}} \right|}{\sum_{i}^{n} b_{i}}
+}\DIFaddend \end{align*}
 
 \paragraph{Information UniFrac}\mbox{}\\
-Information UniFrac is calculated by weighing each branch length by the difference in the uncertainty of the taxa abundance between the two samples. Uncertainty \DIFaddbegin \DIFadd{information }\DIFaddend is calculated as follows, where p is the proportional abundance \cite{shannon2001mathematical}:
+Information UniFrac is calculated by weighing each branch length by the difference in the uncertainty of the taxa abundance between the two samples. Uncertainty \DIFaddbegin \DIFadd{or information ($I$) }\DIFaddend is calculated as follows, where p is the proportional abundance \cite{shannon2001mathematical}:
 
 \begin{equation}\label{eq:schemeP} 
-\DIFaddbegin \DIFadd{information = }\DIFaddend - p  \times log_{2}(p)
+\DIFaddbegin \DIFadd{I = }\DIFaddend - p  \times log_{2}(p)
 \end{equation}
 
-If a sample is \DIFaddbegin \DIFadd{composed of }\DIFaddend 50\% taxa A and 50\% taxa B, then the proportional abundances have maximum uncertainty about what taxa is likely to be seen in a given sequence read. If a sample is 80\% taxa A and 20\% taxa B, then there is less uncertainty, because a given sequence read is more likely to be taxa A. When the amount of uncertainty that a taxa has in one sample corresponds with the amount of uncertainty the same taxa has in a different sample, the abundance of that taxa is mutually informative between samples. Weighting UniFrac by uncertainty combines the the concept of uncertainty with phylogenetic relationships to identify taxa that are differentially informative between groups.
+If a sample is \DIFaddbegin \DIFadd{composed of }\DIFaddend 50\% taxa A and 50\% taxa B, then the proportional abundances have maximum uncertainty about what taxa is likely to be seen in a given sequence read. If a sample is 80\% taxa A and 20\% taxa B, then there is less uncertainty \DIFaddbegin \DIFadd{about both taxa}\DIFaddend , because a given sequence read is more likely to be taxa A \DIFaddbegin \DIFadd{and less likely to be taxa B}\DIFaddend . When the amount of uncertainty that a taxa has in one sample corresponds with the amount of uncertainty the same taxa has in a different sample, the abundance of that taxa is mutually informative between samples. Weighting UniFrac by uncertainty combines the the concept of uncertainty with phylogenetic relationships to identify taxa that are differentially informative between groups.
 
 The formula for Information UniFrac is as follows:
 
 \begin{align*}
-\DIFaddbegin \DIFadd{Information_{AB} = }\DIFaddend \sum_{i}^{n} b_{i} \times \left| \frac{A_{i}}{A_{T}}log\left(\frac{A_{i}}{A_{T}}\right) - \frac{B_{i}}{B_{T}}log\left(\frac{B_{i}}{B_{T}}\right) \right|
-\end{align*}
+\DIFdelbegin \DIFdel{\sum_{i}^{n} b_{i} \times }%DIFDELCMD < \left| %%%
+\DIFdel{\frac{A_{i}}{A_{T}}log}%DIFDELCMD < \left(%%%
+\DIFdel{\frac{A_{i}}{A_{T}}}%DIFDELCMD < \right) %%%
+\DIFdel{- \frac{B_{i}}{B_{T}}log}%DIFDELCMD < \left(%%%
+\DIFdel{\frac{B_{i}}{B_{T}}}%DIFDELCMD < \right) \right|
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{Information_{AB} = \frac{\sum_{i}^{n} b_{i} \times \left| \frac{A_{i}}{A_{T}}log\left(\frac{A_{i}}{A_{T}}\right) - \frac{B_{i}}{B_{T}}log\left(\frac{B_{i}}{B_{T}}\right) \right|}{\sum_{i}^{n} b_{i}}
+}\DIFaddend \end{align*}
 
 \DIFaddbegin \DIFadd{Information UniFrac approaches a minimum of zero (Fig.~\ref{fig5}) when a sample is composed of a monoculture. It also related to the Aitchison distance in compositional data analysis \mbox{%DIFAUXCMD
 \cite{egozcue2011evidence}}%DIFAUXCMD
@@ -396,11 +426,14 @@ The formula for Information UniFrac is as follows:
 }
 
 \DIFaddend \paragraph{\DIFdelbegin \DIFdel{Centered }\DIFdelend Ratio UniFrac}\mbox{}\\
-In complex microbiome communities, there \DIFdelbegin \DIFdel{are very many }\DIFdelend \DIFaddbegin \DIFadd{may be a large number of }\DIFaddend bacterial taxa with \DIFdelbegin \DIFdel{a low level of counts}\DIFdelend \DIFaddbegin \DIFadd{few counts, such that the data is sparse}\DIFaddend . Taking the geometric mean of the proportional abundances of taxa in a microbiome sample represents an unbiased baseline \DIFaddbegin \DIFadd{of the average abundance of features with geometric growth characteristics - such as bacteria which divide by fission }\DIFaddend \cite{aitchison1982statistical}. Experiments generally do not have power to detect differences at abundances below the mean \cite{fernandes2013anova}. Centering the proportional abundances around the geometric mean thus allows one to examine the data in \DIFaddbegin \DIFadd{this }\DIFaddend context, muting differences that are close to \DIFdelbegin \DIFdel{baseline }\DIFdelend \DIFaddbegin \DIFadd{the baseline abundance }\DIFaddend and accentuating outliers. The formula for \DIFdelbegin \DIFdel{centered }\DIFdelend ratio UniFrac is as follows, where $gm$ is the geometric mean:
+In complex microbiome communities, there \DIFdelbegin \DIFdel{are very many }\DIFdelend \DIFaddbegin \DIFadd{may be a large number of }\DIFaddend bacterial taxa with \DIFdelbegin \DIFdel{a low level of counts}\DIFdelend \DIFaddbegin \DIFadd{few counts, such that the data is sparse}\DIFaddend . Taking the geometric mean of the proportional abundances of taxa in a microbiome sample represents an unbiased baseline \DIFaddbegin \DIFadd{of the average abundance of features with geometric growth characteristics - such as bacteria which divide by fission }\DIFaddend \cite{aitchison1982statistical}. Experiments generally do not have power to detect differences at abundances below the mean \cite{fernandes2013anova}. Centering the proportional abundances around the geometric mean thus allows one to examine the data in \DIFaddbegin \DIFadd{this }\DIFaddend context, muting differences that are close to \DIFdelbegin \DIFdel{baseline and accentuating outliers}\DIFdelend \DIFaddbegin \DIFadd{the baseline abundance and accentuating OTUs that are much more abundant than the mean}\DIFaddend . The formula for \DIFdelbegin \DIFdel{centered }\DIFdelend ratio UniFrac is as follows, where $gm$ is the geometric mean:
 
 \begin{align*}
-\DIFaddbegin \DIFadd{Ratio_{AB} = }\DIFaddend \sum_{i}^{n} b_{i} \times \left| \frac{\frac{A_{i}}{A_{T}}}{gm(A_{i})} - \frac{\frac{B_{i}}{B_{T}}}{{gm(B_{i})}} \right|
-\end{align*}
+\DIFdelbegin \DIFdel{\sum_{i}^{n} b_{i} \times }%DIFDELCMD < \left| %%%
+\DIFdel{\frac{\frac{A_{i}}{A_{T}}}{gm(A_{i})} - \frac{\frac{B_{i}}{B_{T}}}{{gm(B_{i})}} }%DIFDELCMD < \right|
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{Ratio_{AB} = \frac{\sum_{i}^{n} b_{i} \times \left| \frac{\frac{A_{i}}{A_{T}}}{gm(A_{i})} - \frac{\frac{B_{i}}{B_{T}}}{{gm(B_{i})}} \right|}{\sum_{i}^{n} b_{i}}
+}\DIFaddend \end{align*}
 
 Note that the geometric mean is calculated by combining all children in the subtree of $b_{i}$ into $\frac{A_{i}}{A_{T}}$ for sample $A$ or $\frac{B_{i}}{B_{T}}$ for sample $B$, and including the rest of the single taxa proportional abundances separately. The one combined proportional abundance and the remaining single taxa proportional abundances are input into the geometric mean formula, as set $a$:
 
@@ -408,13 +441,15 @@ Note that the geometric mean is calculated by combining all children in the subt
 \DIFaddbegin \DIFadd{gm(a) = }\DIFaddend \left( \prod_{i}^{n} a_{i}\right)^{1/n}
 \end{align*}
 
-One challenge when it comes to the analysis of read count data is \DIFdelbegin \DIFdel{the presence of zero counts}\DIFdelend \DIFaddbegin \DIFadd{that the data is very sparse}\DIFaddend . Whether a low-abundance taxa \DIFaddbegin \DIFadd{or feature }\DIFaddend appears in the data as a zero or a low positive count is up to chance, and assuming that a zero count represents the absence of a taxa can be very misleading \cite{fernandes2013anova}. A Bayesian approach can be used to \DIFdelbegin \DIFdel{estimate the likelihood that a zerocould be changed to a positive count if the sample were resequenced, }\DIFdelend \DIFaddbegin \DIFadd{give a posterior estimate of the likelihood for zero: this is }\DIFaddend implemented by the cmultRepl command in the zCompositions package in R \cite{palarea2015zcompositions}.
+One challenge when it comes to the analysis of read count data is \DIFdelbegin \DIFdel{the presence of zero counts}\DIFdelend \DIFaddbegin \DIFadd{that the data is very sparse}\DIFaddend . Whether a low-abundance taxa \DIFaddbegin \DIFadd{or feature }\DIFaddend appears in the data as a zero or a low positive count is up to chance, and assuming that a zero count represents the absence of a taxa can be very misleading \cite{fernandes2013anova}. A Bayesian approach can be used to \DIFdelbegin \DIFdel{estimate the likelihood that a zero could be changed to a positive count if the sample were resequenced, }\DIFdelend \DIFaddbegin \DIFadd{give a posterior estimate of the likelihood for zero count OTUs: this is }\DIFaddend implemented by the cmultRepl command in the zCompositions package in R \cite{palarea2015zcompositions}.
 
 The use of \DIFdelbegin \DIFdel{this }\DIFdelend \DIFaddbegin \DIFadd{ratio }\DIFaddend weighting for UniFrac produces measurements that violate the \DIFaddbegin \DIFadd{metric }\DIFaddend triangle inequality, such that Euclidean statistics are technically invalid. Thus this \DIFaddbegin \DIFadd{metric}\DIFaddend , like the Bray-Curtis metric, is a dissimilarity, not a distance.
 
-For this paper, we calculate UniFrac metrics using a custom R script, which includes unweighted UniFrac, weighted UniFrac, information UniFrac, and \DIFdelbegin \DIFdel{centered }\DIFdelend ratio UniFrac: \DIFdelbegin \DIFdel{https://github.com/ruthgrace/exponentUnifrac/blob/master/UniFrac.r
-}\DIFdelend \DIFaddbegin \url{https://github.com/ruthgrace/ruth_unifrac_workshop}
-\DIFaddend 
+For this paper, we calculate UniFrac metrics using a custom R script, which includes unweighted UniFrac, weighted UniFrac, information UniFrac, and \DIFdelbegin \DIFdel{centered ratio UniFrac : https://github.com/ruthgrace/exponentUnifrac/blob/master/UniFrac.r
+}\DIFdelend \DIFaddbegin \DIFadd{ratio UniFrac \mbox{%DIFAUXCMD
+\cite{ruth_unifrac_workshop}}%DIFAUXCMD
+:
+}\DIFaddend 
 
 \paragraph{Bray-Curtis dissimilarity metric}\mbox{}\\
 The Bray Curtis dissimilarity metric \cite{beals1984bray} quantifies how dissimilar two sites are based on counts. A \DIFaddbegin \DIFadd{Bray-Curtis }\DIFaddend index of 0 means that two samples are identical, while a \DIFaddbegin \DIFadd{Bray-Curtis }\DIFaddend index of 1 means samples do not share any species. It is computed as a proportion through the formula:
@@ -427,7 +462,9 @@ C_{ij} &= 1 - \frac{2C_{ij}}{S_{i} + S_{j}} \\
 \end{align*}
 
 \subsection{Data preparation}
-\DIFaddbegin \DIFadd{The data used comes in the form of a table of counts per operational taxonomic unit per sample, plus a phylogenetic tree. All of our data are derived from 16S rRNA gene tag sequencing experiments, and the data and scripts can be accessed at }\url{https://github.com/JRWu/R_Scripts}\DIFadd{.
+\DIFaddbegin \DIFadd{The data used comes in the form of a table of counts per operational taxonomic unit per sample, plus a phylogenetic tree. All of our data are derived from 16S rRNA gene tag sequencing experiments, and the data and scripts can be accessed at }\url{https://github.com/ruthgrace/r_scripts} \DIFadd{\mbox{%DIFAUXCMD
+\cite{r_scripts}}%DIFAUXCMD
+.
 }\DIFaddend 
 
 \paragraph{Tongue dorsum data set}\mbox{}\\
@@ -472,7 +509,9 @@ Read counts from the HMP data set were rarefied to the smallest total read count
 . There were a total of 5.3 million reads across 115 OTUs, and a minimum and maximum of 3072 and 2.8 million reads per sample. Note that the 2.8 million reads came from a sample that was taken from a patient with an infection, and the next largest number of reads per sample was 282485 (ten times less).
 }
 
-\DIFaddend The count table was analyzed using our custom UniFrac script\DIFaddbegin \DIFadd{, which can be accessed at }\url{https://github.com/ruthgrace/ruth_unifrac_workshop}\DIFaddend . Data was rarefied to the sample with the smallest number of read counts (3072) before the unweighted UniFrac distance matrix was calculated. Non-rarefied data was used for weighted, information, and \DIFdelbegin \DIFdel{centered }\DIFdelend ratio UniFrac. Data was plotted using a principal \DIFdelbegin \DIFdel{components }\DIFdelend \DIFaddbegin \DIFadd{coordinates }\DIFaddend or coordinate analysis as appropriate.
+\DIFaddend The count table was analyzed using our custom UniFrac script\DIFaddbegin \DIFadd{, which can be accessed at }\url{https://github.com/ruthgrace/ruth_unifrac_workshop} \DIFadd{\mbox{%DIFAUXCMD
+\cite{ruth_unifrac_workshop}}%DIFAUXCMD
+}\DIFaddend . Data was rarefied to the sample with the smallest number of read counts (3072) before the unweighted UniFrac distance matrix was calculated. Non-rarefied data was used for weighted, information, and \DIFdelbegin \DIFdel{centered }\DIFdelend ratio UniFrac. Data was plotted using a principal \DIFdelbegin \DIFdel{components or coordinate analysis }\DIFdelend \DIFaddbegin \DIFadd{coordinates or component plot }\DIFaddend as appropriate.
 
 \DIFdelbegin \DIFdel{The script used to run this analysis can be referenced at }%DIFDELCMD < \url{https://github.com/ruthgrace/exponentUnifrac/blob/master/breastmilk_script.r}%%%
 \DIFdel{. }\DIFdelend \DIFaddbegin \paragraph{\DIFadd{Monoculture data set}}\DIFadd{\mbox{}}\\
@@ -489,7 +528,7 @@ A commentary by Lozupone et al. 2011 \cite{lozupone2011unifrac} addressed the se
 \begin{figure}[h]
 \DIFdelbeginFL %DIFDELCMD < \includegraphics[scale=0.7]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/sample_migration.eps}
 %DIFDELCMD < \caption{%%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[scale=0.35]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/sample_migration.eps}
+\DIFdelendFL \DIFaddbeginFL \includegraphics[scale=0.36]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/sample_migration.eps}
 \caption[Sample migration in different rarefactions, plotted on principal coordinates, measured with unweighted UniFrac.]{\DIFaddendFL {\bf Sample migration in different rarefactions, plotted on principal coordinates, measured with unweighted UniFrac.}
 \DIFdelbeginFL \DIFdelFL{Red }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{The left plot is of the tongue data set while the right plot is the tongue dorsum vs. buccal mucosa data set. On the left panel red }\DIFaddendFL samples have moved from the left cluster to the right cluster between rarefactions. Blue samples have moved from the right cluster to the left. Samples are taken from the tongue dorsum body site from the Human Microbiome Project database. \DIFaddbeginFL \DIFaddFL{If the experiment were run once, one might mistakenly assume that there are two clusters of data, however, the inconsistent sample membership of the two groups between rarefactions proves the clustering irreproducible. The tongue dorsum and buccal mucosa data set is included for comparison, with the tongue samples colored black and the buccal mucosa samples colored red. Note that the variance explained in the tongue data set by the first and second coordinate is merely 16.1\% and 9.8\% respectively, indicating that the data is rather spherical, even though the points on the plot appear to show two separated clusters (compare with 32.6\% and 16.2\% in the tongue dorsum vs. buccal mucosa data set). The variance explained in the first and second coordinate in the 2011 UniFrac commentary \mbox{%DIFAUXCMD
 \cite{lozupone2011unifrac} }%DIFAUXCMD
@@ -502,9 +541,10 @@ Sixty tongue dorsum subsamples were drawn from the Human Microbiome Project data
 In both rarefactions on Fig.~\ref{fig2}, samples separated distinctly into two clusters on principal coordinate 1. Principal coordinate 1 explains the most variation in the data, and is thus useful to visualize if any associated metadata is behind the sample separation. However, the separation was not explainable by any metadata associated with the HMP experiment, and is thus an undesirable result. When plotting the rarefactions against each other, \DIFdelbegin \DIFdel{various }\DIFdelend \DIFaddbegin \DIFadd{several }\DIFaddend samples are observed \DIFdelbegin \DIFdel{moving between the various clusters}\DIFdelend \DIFaddbegin \DIFadd{to be unstable, exhibiting large differences in location}\DIFaddend . This example demonstrates that samples with little difference can appear to be different through the unweighted UniFrac distance metric \DIFaddbegin \DIFadd{and that rarefaction can lead to misleading and non-reproducible results}\DIFaddend .
 
 \begin{figure}[h]
-\includegraphics[scale=0.7]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/ellipses.eps}
-\DIFdelbeginFL %DIFDELCMD < \caption{%%%
-\DIFdelendFL \DIFaddbeginFL \caption[Maxiumum relative deviation of rarefactions versus median deviation for traditional and non-traditional microbiome dissimilarity metrics.]{\DIFaddendFL {\bf Maxiumum relative deviation of rarefactions versus median deviation for traditional and non-traditional microbiome dissimilarity metrics.} Sixty samples from the tongue dorsum were taken from the Human Microbiome Project \cite{turnbaugh2007human}, and rarefied 100 times. The maximum relative deviation was plotted against the median relative deviation of the rarefied data, and ellipses were drawn at the 95\% confidence interval, around the cloud of points for each metric. \DIFaddbeginFL \DIFaddFL{A higher maximum and median devation indicates lower reproducibility of results between rarefaction instances. }\DIFaddendFL Both the maximum relative deviation of rarefied data and the median relative deviation of rarefied data are greater in unweighted UniFrac than in weighted UniFrac, Bray Curtis distance, \DIFdelbeginFL \DIFdelFL{centered }\DIFdelendFL ratio UniFrac, and information UniFrac.}
+\DIFdelbeginFL %DIFDELCMD < \includegraphics[scale=0.7]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/ellipses.eps}
+%DIFDELCMD < \caption{%%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[scale=0.4]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/ellipses.eps}
+\caption[Maxiumum relative deviation of rarefactions versus median deviation for traditional and non-traditional microbiome dissimilarity metrics.]{\DIFaddendFL {\bf Maxiumum relative deviation of rarefactions versus median deviation for traditional and non-traditional microbiome dissimilarity metrics.} Sixty samples from the tongue dorsum were taken from the Human Microbiome Project \cite{turnbaugh2007human}, and rarefied 100 times. The maximum relative deviation was plotted against the median relative deviation of the rarefied data, and ellipses were drawn at the 95\% confidence interval, around the cloud of points for each metric. \DIFaddbeginFL \DIFaddFL{A higher maximum and median devation indicates lower reproducibility of results between rarefaction instances. }\DIFaddendFL Both the maximum relative deviation of rarefied data and the median relative deviation of rarefied data are greater in unweighted UniFrac than in weighted UniFrac, Bray Curtis \DIFdelbeginFL \DIFdelFL{distance}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{dissimilarity}\DIFaddendFL , \DIFdelbeginFL \DIFdelFL{centered }\DIFdelendFL ratio UniFrac, and information UniFrac.}
 \label{fig3}
 \end{figure}
 
@@ -555,7 +595,7 @@ Variation in different rarefactions of data in unweighted UniFrac analysis is ex
 }
 %DIFAUXCMD
 \DIFdelendFL \DIFaddbeginFL \caption[Original abundance of taxa and rarefied abundance of taxa.]{
-{\bf \DIFaddFL{Original abundance of taxa and rarefied abundance of taxa.}} \DIFaddFL{This data was simulated to demonstrate how rarefaction can change the distances reported by the unweighted UniFrac metric. Originally, sample A contained 1075 counts and sample B contained 221 counts in total. Both samples were rarefied to 221 counts, twice. The OTU in bold has been rarified to a zero count in sample A for one instance and a non zero count in the other instance. In Rarefaction 1, the unweighetd UniFrac distance (unshared over total branches) is 0.4175, while in Rarefaction 2 the distance is 1.12.}}
+{\bf \DIFaddFL{Original abundance of taxa and rarefied abundance of taxa.}} \DIFaddFL{This data was simulated to demonstrate how rarefaction can change the distances reported by the unweighted UniFrac metric. Originally, sample A contained 1075 counts and sample B contained 221 counts in total. Both samples were rarefied to 221 counts, twice. The OTU in bold has been rarified to a zero count in sample A for one instance and a non zero count in the other instance. In Rarefaction 1, the unweighted UniFrac distance (unshared over total branches) is 0.4175, while in Rarefaction 2 the distance is 1.12.}}
 \DIFaddendFL \begin{tabular}{|l|l|l|l|l|l|l|l|}
 \hline
 \bf{OTU.ID} & \bf{A} & \bf{B} & \bf{\shortstack{A\\R1}} & \bf{\shortstack{B\\R1}} & \bf{\shortstack{A\\R2}} & \bf{\shortstack{B\\R2}}\\ \hline
@@ -568,10 +608,12 @@ OTU.38187 & 646 & 115 & 132 & 115 & 122 & 115\\ \hline
 OTU.38446 & 6 & 8 & 0 & 8 & 1 & 8\\ \hline
 OTU.45429 & 218 & 6 & 55 & 6 & 49 & 6\\ \hline
 \end{tabular}
-\begin{flushleft}
+\DIFaddbeginFL \label{table1}
+\DIFaddendFL \begin{flushleft}
 \end{flushleft}
-\label{table1}
-% \end{adjustwidth}
+\DIFdelbeginFL %DIFDELCMD < \label{table1}
+%DIFDELCMD < %%%
+\DIFdelendFL % \end{adjustwidth}
 \end{table}}
 
 \DIFdelbegin \begin{eqnarray*}
@@ -613,7 +655,7 @@ The difference in information content between \DIFaddbegin \DIFadd{taxa with }\D
 \includegraphics[scale=0.6]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/weightings.eps}
 \DIFdelbeginFL %DIFDELCMD < \caption{%%%
 \DIFdelendFL \DIFaddbeginFL \caption[UniFrac weights.]{\DIFaddendFL {\bf \DIFdelbeginFL \DIFdelFL{Unifrac }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{UniFrac }\DIFaddendFL weights. }
-Each UniFrac weighting is plotted with the corresponding proportional abundance. The black line is unweighted UniFrac, the red line is weighted UniFrac,and  the blue line is information UniFrac. \DIFaddbeginFL \DIFaddFL{From 0 to 0.2 on the x-axis information UniFrac has a higher slope, and therefore more discovery power with smaller changes in abundance. As the x-axis approaches 1, changes in abundance add little discovery power to information Unifrac.}\DIFaddendFL }
+Each UniFrac weighting is plotted with the corresponding proportional abundance. The black line is unweighted UniFrac, the red line is weighted UniFrac,and  the blue line is information UniFrac. \DIFaddbeginFL \DIFaddFL{From 0 to 0.2 on the x-axis information UniFrac has a higher slope, and therefore more discovery power for smaller changes in abundance. As the x-axis approaches 1, changes in abundance add little discovery power to information Unifrac.}\DIFaddendFL }
 \label{fig5}
 \end{figure}
 
@@ -670,7 +712,7 @@ The reason the infected sample in the breast milk study is so distinct from the 
 \DIFadd{Each sample in the monoculture dataset is 97\% dominated by one of three taxa. However, within the remaining 3\% there is variation in the counts.
 }
 
-\DIFadd{Unweighted UniFrac, being binary test, detects only the variation in the remaining 3\% of counts, without showing the difference in the monocultures. Weighted UniFrac detects only the difference in the identity of the monoculture, and the separation is driven by phylogenetic distance - the pairwise distance from }\textit{\DIFadd{Pasteurella}} \DIFadd{to }\textit{\DIFadd{Staphylococcus}} \DIFadd{and }\textit{\DIFadd{Pseudomonas}} \DIFadd{to }\textit{\DIFadd{Staphylococcus}} \DIFadd{is just over 0.9 on the phylogenetic tree while the distance from }\textit{\DIFadd{Pasteurella}} \DIFadd{to }\textit{\DIFadd{Pseudomonas}} \DIFadd{is 0.45. This is in correspondence with the PCoA plot where the first coordinate (which separates the }\textit{\DIFadd{Staphylococcus}} \DIFadd{species from the other two) explains over 90\% of the variance in the data set.
+\DIFadd{Unweighted UniFrac, being a binary test, detects only the variation in the remaining 3\% of counts, without showing the difference in the monocultures. Weighted UniFrac detects only the difference in the identity of the monoculture, and the separation is driven by phylogenetic distance - the pairwise distance from }\textit{\DIFadd{Pasteurella}} \DIFadd{to }\textit{\DIFadd{Staphylococcus}} \DIFadd{and }\textit{\DIFadd{Pseudomonas}} \DIFadd{to }\textit{\DIFadd{Staphylococcus}} \DIFadd{is just over 0.9 on the phylogenetic tree while the distance from }\textit{\DIFadd{Pasteurella}} \DIFadd{to }\textit{\DIFadd{Pseudomonas}} \DIFadd{is 0.45. This is in correspondence with the PCoA plot where the first coordinate (which separates the }\textit{\DIFadd{Staphylococcus}} \DIFadd{species from the other two) explains over 90\% of the variance in the data set.
 }
 
 \DIFadd{Information UniFrac is known to not perform very well for monocultures, due to taxa with very high and low proportional abundances having uncertainty information values close to zero (Fig.~\ref{fig5}). While the samples separate visually with information UniFrac, the variance explained by the separation is low, and the distance matrix does not separate the three groups by hierarchical clustering. Ratio UniFrac and Bray Curtis both separate the samples by monoculture, and also differentiate the samples by their minor variations, showcasing a more representative perspective of this data set.
@@ -684,15 +726,14 @@ The reason the infected sample in the breast milk study is so distinct from the 
 \DIFaddend \section*{Discussion}
 As shown in the tongue and \DIFdelbegin \DIFdel{cheek }\DIFdelend \DIFaddbegin \DIFadd{buccal mucosa }\DIFaddend data set, unweighted UniFrac is perfectly sufficient for data sets with a notable difference. However, in data sets with no difference or a very small difference between groups such the uniform tongue dorsum data set, unweighted UniFrac is the least reliable and we found that it may produce wildly different results depending on rarefaction and sequencing depth. This can result in spurious groups, or inclusion of samples in the wrong groups.
 
-We found weighted UniFrac, information UniFrac, \DIFdelbegin \DIFdel{centered }\DIFdelend ratio UniFrac, and Bray-Curtis methods to be more reliable choices. We suggest that investigators use several methods as they can detect outliers in different circumstances. When an outlier is detected by any metric, an investigation is warranted, as with our example in the breast milk data set.
+We found weighted UniFrac, information UniFrac, \DIFdelbegin \DIFdel{centered }\DIFdelend ratio UniFrac, and Bray-Curtis methods to be more reliable choices. We suggest that investigators use several methods as they can detect outliers in different circumstances. When an outlier is detected by any metric, an investigation is warranted, as with \DIFdelbegin \DIFdel{our }\DIFdelend \DIFaddbegin \DIFadd{the }\DIFaddend example in the breast milk data set.
 
-\DIFaddbegin \DIFadd{We do not believe that any of these weightings are a perfect model for microbiome data. Each tool is prone to its own set of weaknesses. If the difference in groups is driven by presence/absence then UniFrac is a reasonable choice. If the difference is driven by a linear abundance, then weighted UniFrac is a good choice. Information UniFrac and ratio UniFrac are useful for examining data sets that contain the similar sets of taxa between groups. Ratio UniFrac is especially good for examining data sets that have more subtle variations, due to its non linear nature. In any case, inspection should be done to make sure that the tool used accurately represents the data.
+\DIFaddbegin \DIFadd{We do not believe that any of these weightings are a perfect model for microbiome data. Each tool is prone to its own set of weaknesses. If the difference in groups is driven by presence/absence then UniFrac is a reasonable choice. If the difference is driven by a linear abundance, then weighted UniFrac is a good choice. Information UniFrac and ratio UniFrac are useful for examining data sets that contain a similar set of taxa between groups. Information and ratio UniFrac are especially useful for examining data sets that have more subtle variations, due to their non linear nature. In any case, inspection should be done to make sure that the tool used accurately represents the data.
 }
 
 \DIFaddend In summary, with the addition of information UniFrac and \DIFdelbegin \DIFdel{centered }\DIFdelend ratio UniFrac, biologists have more tools at their disposal to prevent spurious interpretations, detect outliers, and ultimately understand their data better.
-\DIFaddbegin 
 
-\section*{\DIFadd{Supporting Information}}
+\DIFaddbegin \section*{\DIFadd{Supporting Information}}
 
 %DIF >  Include only the SI item label in the paragraph heading. Use the \nameref{label} command to cite SI items in the text.
 \begin{figure}[h]
@@ -732,10 +773,16 @@ We found weighted UniFrac, information UniFrac, \DIFdelbegin \DIFdel{centered }\
 \caption[Principal coordinate analysis derived from tongue dorsum and buccal mucosa samples using unweighted UniFrac distance matrices with no tree pruning.]{{\bf \DIFaddFL{Principal coordinate analysis derived from tongue dorsum and buccal mucosa samples using unweighted UniFrac distance matrices with no tree pruning.}}}
 \label{S3_Fig}
 \end{figure}
-\DIFaddend 
 
-\section*{Acknowledgments}
-Thanks to Camilla Urbaniak for providing the data from her breast milk study \cite{urbaniak2016human}.
+\begin{figure}[h]
+\paragraph*{\DIFaddFL{S6 Fig.}}\DIFaddFL{\mbox{}}\\
+\includegraphics[scale=0.7]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/tree_pruning_example.eps}
+\caption[Weighted UniFrac is a dissimilarity with tree pruning.]{{\bf \DIFaddFL{Weighted UniFrac is a dissimilarity with tree pruning.}} \DIFaddFL{Here, the weighted UniFrac measurements without tree pruning are: $W_{AB} = \frac{121}{252}$, $W_{BC} = \frac{111}{252}$, and $W_{AC} = \frac{11}{12}$. With tree pruning, the measurements are: $W_{AB} = \frac{121}{252}$, $W_{BC} = \frac{111}{252}$, and $W_{AC} = 1$, which fails the triangle inequality.}}
+\label{S4_Fig}
+\end{figure}
+
+\DIFaddend \section*{Acknowledgments}
+Thanks to Camilla Urbaniak for providing the data from \DIFdelbegin \DIFdel{her }\DIFdelend \DIFaddbegin \DIFadd{the }\DIFaddend breast milk study \cite{urbaniak2016human}.
 
 \nolinenumbers
 
