@@ -88,7 +88,7 @@ The formula for Information UniFrac is as follows:
 Information_{AB} = \frac{\sum_{i}^{n} b_{i} \times \left| \frac{A_{i}}{A_{T}}log\left(\frac{A_{i}}{A_{T}}\right) - \frac{B_{i}}{B_{T}}log\left(\frac{B_{i}}{B_{T}}\right) \right|}{\sum_{i}^{n} b_{i}}
 \end{align*}
 
-Information UniFrac approaches a minimum of zero (Fig.~\ref{fig5}) when a sample is composed of a monoculture. It also related to the Aitchison distance in compositional data analysis \cite{egozcue2011evidence}.
+Information UniFrac approaches a minimum of zero when a sample is composed of a monoculture. It also related to the Aitchison distance in compositional data analysis \cite{egozcue2011evidence}.
 
 \paragraph{Ratio UniFrac}\mbox{}\\
 In complex microbiome communities, there may be a large number of bacterial taxa with few counts, such that the data is sparse. Taking the geometric mean of the proportional abundances of taxa in a microbiome sample represents an unbiased baseline of the average abundance of features with geometric growth characteristics - such as bacteria which divide by fission \cite{aitchison1982statistical}. Experiments generally do not have power to detect differences at abundances below the mean \cite{fernandes2013anova}. Centering the proportional abundances around the geometric mean thus allows one to examine the data in this context, muting differences that are close to the baseline abundance and accentuating OTUs that are much more abundant than the mean. The formula for ratio UniFrac is as follows, where $gm$ is the geometric mean:
@@ -225,7 +225,7 @@ Weighted UniFrac is an improvement on unweighted UniFrac, however weighted UniFr
 
 \subsection{Information UniFrac}
 
-The difference in information content between taxa with low proportional abundances (which make up the bulk of microbiome data) is generally higher than the difference between the proportional abundances themselves, potentially allowing scientists to differentiate samples with subtle differences, such as the infected breastmilk sample in Fig.~\ref{fig7}.
+The difference in information content between taxa with low proportional abundances (which make up the bulk of microbiome data) is generally higher than the difference between the proportional abundances themselves, potentially allowing scientists to differentiate samples with subtle differences.
 
 \begin{figure}[h]
 \includegraphics[scale=0.6]{/Users/dphamnyghonca/Desktop/gloor/msc_thesis_2016/unifrac_paper/weightings.eps}
@@ -275,7 +275,7 @@ A principal coordinate analysis of a simulated 16S rRNA gene tag experiment base
 \label{fig8}
 \end{figure}
 
-Each sample in the monoculture dataset is 97\% dominated by one of three taxa. However, within the remaining 3\% there is variation in the counts.
+Each sample in the monoculture dataset (Fig. ~\ref{fig8}) is 97\% dominated by one of three taxa. However, within the remaining 3\% there is variation in the counts.
 
 Unweighted UniFrac, being a binary test, detects only the variation in the remaining 3\% of counts, without showing the difference in the monocultures. Weighted UniFrac detects only the difference in the identity of the monoculture, and the separation is driven by phylogenetic distance - the pairwise distance from \textit{Pasteurella} to \textit{Staphylococcus} and \textit{Pseudomonas} to \textit{Staphylococcus} is just over 0.9 on the phylogenetic tree while the distance from \textit{Pasteurella} to \textit{Pseudomonas} is 0.45. This is in correspondence with the PCoA plot where the first coordinate (which separates the \textit{Staphylococcus} species from the other two) explains over 90\% of the variance in the data set.
 
